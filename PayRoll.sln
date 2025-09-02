@@ -1,0 +1,70 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36414.22 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayRollProject", "PayRollProject\PayRollProject.csproj", "{0298363D-6E39-41B1-B76A-9C301C15CFA9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9AE20228-C835-4677-A344-9F8A8C35ACB0} = {9AE20228-C835-4677-A344-9F8A8C35ACB0}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayRollProject.WebFrameWork", "PayRollProject.WebFrameWork\PayRollProject.WebFrameWork.csproj", "{9AE20228-C835-4677-A344-9F8A8C35ACB0}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D1F06358-D43F-466E-8545-62472F15810E} = {D1F06358-D43F-466E-8545-62472F15810E}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayRollProject.Services", "PayRollProject.Services\PayRollProject.Services.csproj", "{D1F06358-D43F-466E-8545-62472F15810E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{817BE92C-0744-469E-8F86-9EA35C18722E} = {817BE92C-0744-469E-8F86-9EA35C18722E}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayRollProject.DataModel", "PayRollProject.DataModel\PayRollProject.DataModel.csproj", "{817BE92C-0744-469E-8F86-9EA35C18722E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{ED085615-009F-4731-AA4F-B9C83FBD044F} = {ED085615-009F-4731-AA4F-B9C83FBD044F}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayRollProject.Entities", "PayRollProject.Entities\PayRollProject.Entities.csproj", "{ED085615-009F-4731-AA4F-B9C83FBD044F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{851D2FF6-BEFC-474C-8999-61DDCD2E6942} = {851D2FF6-BEFC-474C-8999-61DDCD2E6942}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayRollProject.Common", "PayRollProject.Common\PayRollProject.Common.csproj", "{851D2FF6-BEFC-474C-8999-61DDCD2E6942}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0298363D-6E39-41B1-B76A-9C301C15CFA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0298363D-6E39-41B1-B76A-9C301C15CFA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0298363D-6E39-41B1-B76A-9C301C15CFA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0298363D-6E39-41B1-B76A-9C301C15CFA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AE20228-C835-4677-A344-9F8A8C35ACB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AE20228-C835-4677-A344-9F8A8C35ACB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AE20228-C835-4677-A344-9F8A8C35ACB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AE20228-C835-4677-A344-9F8A8C35ACB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1F06358-D43F-466E-8545-62472F15810E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1F06358-D43F-466E-8545-62472F15810E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1F06358-D43F-466E-8545-62472F15810E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1F06358-D43F-466E-8545-62472F15810E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{817BE92C-0744-469E-8F86-9EA35C18722E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{817BE92C-0744-469E-8F86-9EA35C18722E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{817BE92C-0744-469E-8F86-9EA35C18722E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{817BE92C-0744-469E-8F86-9EA35C18722E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED085615-009F-4731-AA4F-B9C83FBD044F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED085615-009F-4731-AA4F-B9C83FBD044F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED085615-009F-4731-AA4F-B9C83FBD044F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED085615-009F-4731-AA4F-B9C83FBD044F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{851D2FF6-BEFC-474C-8999-61DDCD2E6942}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{851D2FF6-BEFC-474C-8999-61DDCD2E6942}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{851D2FF6-BEFC-474C-8999-61DDCD2E6942}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{851D2FF6-BEFC-474C-8999-61DDCD2E6942}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A2EB23A0-C7F0-4D52-9790-C75045C95988}
+	EndGlobalSection
+EndGlobal

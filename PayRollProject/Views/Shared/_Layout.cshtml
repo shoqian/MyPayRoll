@@ -1,0 +1,61 @@
+﻿@using PayRollProject
+@using PayRollProject.Models
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>@ViewData["Title"] - سیستم جامع حقوق و دستمزد</title>
+    <script type="importmap"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/PayRollProject.styles.css" asp-append-version="true"/>
+
+    <!--assets-->
+    <link rel="stylesheet" type="text/css" href="~/assets/vendors/css/vendors.min.css" asp-append-version="true">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/bootstrap.min.css" asp-append-version="true">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/bootstrap-extended.css" asp-append-version="true">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/colors.css" asp-append-version="true">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/components.css" asp-append-version="true">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/themes/dark-layout.css" asp-append-version="true">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/themes/semi-dark-layout.css" asp-append-version="true">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/core/menu/menu-types/vertical-menu.css" asp-append-version="true">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/pages/authentication.css" asp-append-version="true">
+    <!--assets-->
+
+
+</head>
+<body class="blank-page">
+
+
+    <div class="content-wrapper">
+        <div class="content-body">
+            @RenderBody()
+        </div>
+    </div>
+
+
+<footer class="border-top footer text-muted">
+    <div class="container">
+        &copy; 1404 - تهیه و برنامه نویس مهدی شوقیان - <a asp-area="" asp-controller="Home" asp-action="Privacy">قوانین</a>
+    </div>
+</footer>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+
+<!--asset-->
+<script src="~/assets/vendors/js/vendors.min.js" asp-append-version="true"></script>
+<script src="~/assets/fonts/LivIconsEvo/js/LivIconsEvo.tools.min.js" asp-append-version="true"></script>
+<script src="~/assets/fonts/LivIconsEvo/js/LivIconsEvo.defaults.js" asp-append-version="true"></script>
+<script src="~/assets/fonts/LivIconsEvo/js/LivIconsEvo.min.js" asp-append-version="true"></script>
+<script src="~/assets/js/scripts/configs/vertical-menu-dark.js" asp-append-version="true"></script>
+<script src="~/assets/js/core/app-menu.js" asp-append-version="true"></script>
+<script src="~/assets/js/scripts/footer.js" asp-append-version="true"></script>
+<!--asset-->
+
+@await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>
