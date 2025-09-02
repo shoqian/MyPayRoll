@@ -2,7 +2,6 @@ using PayRollProject.DataModel.Services.Interface;
 using PayRollProject.DataModel.Services.Repository;
 using PayRollProject.WebFrameWork.Extensions;
 
-
 var builder = WebApplication.CreateBuilder(args);
 
 var appSettingConfig = builder.Configuration

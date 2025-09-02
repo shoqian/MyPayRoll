@@ -270,7 +270,7 @@ html body.blank-page .content {
 }
 
 html body.blank-page .content.app-content {
-	overflow: overlay;
+	overflow: auto;
 	overflow-x: hidden;
 }
 
@@ -1041,8 +1041,8 @@ body.menu-collapsed .menu-static {
 		transform: translate3d(240px, 0, 0);
 		-webkit-backface-visibility: hidden;
 		backface-visibility: hidden;
-		-webkit-perspective: 1000;
-		perspective: 1000;
+		-webkit-perspective: 1000px;
+		perspective: 1000px;
 	}
 
 	.menu-open .main-menu {
@@ -4302,7 +4302,7 @@ div.dataTables_wrapper div.dataTables_length {
 
 div.dataTables_wrapper div.dataTables_filter select,
 div.dataTables_wrapper div.dataTables_length select {
-	background-position: calc(100% - (100% - 4px)) 9px, calc(100% - (100% - 20px)) 13px, 0 0;
+	background-position: calc(100% - (100% - 4px)) 9px;
 	padding: 0 0.8rem 0 1.7rem;
 }
 
@@ -4328,9 +4328,9 @@ div.dataTables_wrapper div.dataTables_paginate ul.pagination {
 
 	div.dataTables_wrapper div.dataTables_paginate ul.pagination,
 	div.dataTables_wrapper div.dataTables_info ul.pagination {
-		-webkit-box-pack: left;
-		-webkit-justify-content: left;
-		-ms-flex-pack: left;
+		-webkit-box-pack: end;
+		-webkit-justify-content: flex-end;
+		-ms-flex-pack: end;
 		justify-content: left;
 	}
 }

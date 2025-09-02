@@ -94,7 +94,7 @@ body.dark-layout.bg-full-screen-image {
 
 body.dark-layout .ps__rail-y,
 body.dark-layout .ps__rail-y:focus {
-	background-color: #EEEEEE0D !important;
+	background-color: #E5E923 !important;
 	width: 10px !important;
 }
 
@@ -241,8 +241,7 @@ body.dark-layout .main-menu {
 }
 
 body.dark-layout .main-menu .shadow-bottom {
-	background: -webkit-linear-gradient(top, #1A233AF0 44%, #1A233ABF 73%, #2C303C00);
-	background: linear-gradient(-180deg, #1A233AF0 44%, #1A233ABF 73%, #2C303C00);
+	background: -webkit-linear-gradient(top, #4D9DCE 44%, #21EFAD 73%, #E19C22);
 }
 
 body.dark-layout .main-menu .navbar-header {

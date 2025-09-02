@@ -621,7 +621,7 @@ label {
 	display: -ms-flexbox;
 	display: flex;
 	-webkit-box-align: start;
-	-webkit-align-items: start;
+	-webkit-align-items: flex-start;
 	-ms-flex-align: start;
 	align-items: start;
 	margin-bottom: 0
@@ -824,7 +824,7 @@ label {
 
 select.form-control:not([multiple]) {
 	background-image: url(../../assets/images/pages/arrow-down.png);
-	background-position: calc(100% - (100% - 12px)) 13px, calc(100% - (100% - 20px)) 13px, 0 0;
+	background-position: calc(100% - (100% - 12px)) 13px;
 	background-size: 12px 12px, 10px 10px;
 	background-repeat: no-repeat;
 	-webkit-appearance: none;

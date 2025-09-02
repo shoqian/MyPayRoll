@@ -24,7 +24,7 @@
 .form-group.error select:focus,
 .form-group.error textarea:focus {
 	border-color: #FF5B5C;
-	box-shadow: 0 3 10px 0 #FF5B5C;
+	box-shadow: 0 3px 10px 0 #FF5B5C;
 }
 
 .form-group .help-block {
