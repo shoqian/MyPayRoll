@@ -1,7 +1,3 @@
-using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
-using PayRollProject.Models;
-
 namespace PayRollProject.Controllers
 {
     public class HomeController : Controller

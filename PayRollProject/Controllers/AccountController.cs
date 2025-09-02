@@ -1,11 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-using Microsoft.AspNetCore.Mvc.RazorPages;
-
-using System.Collections.Generic;
-
-
-namespace PayRollProject.Controllers
+﻿namespace PayRollProject.Controllers
 {
     public class AccountController : Controller
     {
