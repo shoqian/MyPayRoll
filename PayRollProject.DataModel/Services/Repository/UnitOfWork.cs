@@ -12,8 +12,8 @@
             this._context = context;
         }
 
-        private GenericCRUDClass<ApplicationUsers> _userManager;
-        private GenericCRUDClass<ApplicationRoles> _roleManager;
+        private GenericCRUDClass<ApplicationUsers>? _userManager;
+        private GenericCRUDClass<ApplicationRoles>? _roleManager;
 
 
 

@@ -6,6 +6,16 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+    <FileAlignment>1024</FileAlignment>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+    <FileAlignment>1024</FileAlignment>
+  </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\PayRollProject.WebFrameWork\PayRollProject.WebFrameWork.csproj" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.8" />
@@ -17,11 +27,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\" />
     <Folder Include="Areas\AdminArea\Controllers\" />
     <Folder Include="Areas\AdminArea\Data\" />
     <Folder Include="Areas\AdminArea\Models\" />
-    <Folder Include="Areas\AdminArea\Views\" />
+    <Folder Include="Areas\AdminArea\Views\Shared\" />
   </ItemGroup>
 
 </Project>

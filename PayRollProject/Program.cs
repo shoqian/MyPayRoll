@@ -1,3 +1,4 @@
+
 var builder = WebApplication.CreateBuilder(args);
 
 var appSettingConfig = builder.Configuration
@@ -26,6 +27,8 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 
 var app = builder.Build();
+
+Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("@32392e302e303b32393bKq35AiUSRDJT5uIaFzRCrJWDo7gKUKH1Rwb6jH+WX4o=");
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
