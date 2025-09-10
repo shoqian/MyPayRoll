@@ -1,7 +1,4 @@
-﻿@using PayRollProject
-@using PayRollProject.Entities.Models
-@using PayRollProject.Models
-@model LoginViewModel;
+﻿@model LoginViewModel;
 
 @{
     ViewData["Title"] = "فرم ورود اطلاعات";
@@ -18,8 +15,8 @@
 
     .e-icons {
         font-size: 1rem !important;
-        display: flex;
-        flex-direction: row;
+        float: left !important;
+        padding-top: 15px !important;
     }
 
     .e-arrow-left:before {
@@ -36,7 +33,7 @@
             <div class="row m-0" style="background-color: white;">
                 <!-- left section-login -->
                 <div class="col-md-6 col-12 px-0">
-                    <div class="card disable-rounded-right h-100 d-flex justify-content-center mb-0 p-2" style="background-color: #F2F4F4">
+                    <div class="card disable-rounded-right h-100 d-flex justify-content-center mb-0 p-2">
                         <div class="card-header pb-1">
                             <div class="card-title">
                                 <h4 class="mb-2 text-center">سيستم جامع حقوق و دستمزد</h4>
@@ -57,9 +54,9 @@
 
                                     <span id="spnvalidate" class="text text-danger"></span>
                                     @* <button type="submit" class="btn btn-primary glow w-100 position-relative">ورود <i id='icon-arrow' class='bx bx-left-arrow-alt'></i></button> *@
-                                    <div class="icons">
-                                        <ejs-button id="submit" typeof="submit" class="e-icons e-arrow-left e-large" title="ورود" iconPosition="Right" cssClass="e-outline btn glow w-100 rounded-2 publicLoginClass color-btn" content="ورود"></ejs-button>
-                                    </div>
+
+                                    <ejs-button id="submit" typeof="submit" class="e-icons e-large" iconCss="e-icons e-arrow-left e-large" title="ورود" iconPosition="Right" cssClass="e-outline btn glow w-100 rounded-2 publicLoginClass color-btn" content="ورود"></ejs-button>
+
                                 </form>
 
                             </div>

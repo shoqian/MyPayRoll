@@ -27,10 +27,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\AdminArea\Controllers\" />
     <Folder Include="Areas\AdminArea\Data\" />
     <Folder Include="Areas\AdminArea\Models\" />
-    <Folder Include="Areas\AdminArea\Views\Shared\" />
+    <Folder Include="wwwroot\assets\icon\" />
   </ItemGroup>
 
 </Project>
