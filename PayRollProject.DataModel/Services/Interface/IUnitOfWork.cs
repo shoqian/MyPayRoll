@@ -9,6 +9,7 @@
         GenericCRUDClass<ApplicationUsers> userManager { get; }
         
         GenericCRUDClass<ApplicationRoles> roleManager { get; }
+        GenericCRUDClass<Countries> countriesUW { get; }
 
         IEntityTransaction BeginTransaction();
 

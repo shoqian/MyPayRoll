@@ -1,0 +1,50 @@
+﻿@{
+    ViewData["AdminTitle"] = "لیست کشورها";
+}
+
+<div style="display: flex; font-size: 13px;">
+    <p style="margin-left: 20px;"> تعداد کل کشورها : <span id="spnRowCount"></span></p>
+</div>
+
+<div class="row bg-white">
+    <div class="col-md-12">
+        <ejs-grid id="countryList" created="createdFunc" allowPaging allowFiltering allowGrouping allowSorting>
+            <e-grid-pagesettings pageSize=3 pageCount=3 ></e-grid-pagesettings>
+            <e-grid-filtersettings mode="Immediate" type="Menu" ></e-grid-filtersettings>
+            <e-grid-columns>
+                <e-grid-column headerText="نام کشور" field="CountryName" TextAlign="Center"></e-grid-column>
+                <e-grid-column headerText="توضیحات" field="Description" TextAlign="Right"></e-grid-column>
+                <e-grid-column field="CountryID" visible="false" isPrimaryKey="true" allowEditing="false"></e-grid-column>
+            </e-grid-columns>
+        </ejs-grid>
+    </div>
+</div>
+
+
+@section AdminScripts {
+    <script>
+        function createdFunc() {
+            // تعریف یک کلاس سفارشی برای پردازش پاسخ دریافتی از سرور
+            class CustomAdaptor extends ej.data.UrlAdaptor{
+                processResponse(data, ds, query, xhr, request, changes){
+                    if(!ej.base.isNullOrUndefined(data.action)){
+                        if(data.action=="fetchgrid"){
+                            $("#spnRowCount").text(data.count);
+                        }
+                        if(!ej.base.isNullOrUndefined(data.data)){
+                            return data.data;
+                        }else{
+                            return data;
+                        }
+                    }
+                }
+            }
+            // دریافت اطلاعات از دیتابیس به روش AJAX و تنظیم منبع داده‌ها برای گرید
+            var grid = document.querySelector('#countryList').ej2_instances[0];
+            grid.dataSource = new ej.data.DataManager({
+                url: "/AdminArea/CountryManagement/FetchCountryList",
+                adaptor: new CustomAdaptor()
+            });
+        }
+    </script>
+}

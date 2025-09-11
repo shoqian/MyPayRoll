@@ -14,6 +14,7 @@
 
         private GenericCRUDClass<ApplicationUsers>? _userManager;
         private GenericCRUDClass<ApplicationRoles>? _roleManager;
+        private GenericCRUDClass<Countries>? _countriesTbl;
 
 
 
@@ -45,7 +46,20 @@
                 return this._roleManager;
             }
         }
-        
+
+        // جدول کشورها
+        public GenericCRUDClass<Countries> countriesUW
+        {
+            get
+            {
+                if (this._countriesTbl == null)
+                {
+                    this._countriesTbl = new GenericCRUDClass<Countries>(this._context);
+                }
+                return this._countriesTbl;
+            }
+        }
+
         public IEntityTransaction BeginTransaction() => new EntityTransaction(_context);
         
         public void Save() => _context.SaveChanges();
