@@ -1,4 +1,5 @@
-﻿@{
+﻿
+@{
     ViewData["AdminTitle"] = "لیست کشورها";
 }
 
@@ -9,11 +10,12 @@
 <div class="row bg-white">
     <div class="col-md-12">
         <ejs-grid id="countryList" created="createdFunc" allowPaging allowFiltering allowGrouping allowSorting>
-            <e-grid-pagesettings pageSize=3 pageCount=3 ></e-grid-pagesettings>
-            <e-grid-filtersettings mode="Immediate" type="Menu" ></e-grid-filtersettings>
+            <e-grid-pagesettings pageSize=10 pageCount=3></e-grid-pagesettings>
+            <e-grid-filtersettings mode="Immediate" type="Menu"></e-grid-filtersettings>
             <e-grid-columns>
-                <e-grid-column headerText="نام کشور" field="CountryName" TextAlign="Center"></e-grid-column>
-                <e-grid-column headerText="توضیحات" field="Description" TextAlign="Right"></e-grid-column>
+                <e-grid-column field="rowIndex" allowediting="false" allowFiltering="false" allowSorting="false" headerText=" " width="40" template="#rowNumberTmp"></e-grid-column>
+                <e-grid-column headerTemplate="#countryHeader" field="CountryName" TextAlign="Right"></e-grid-column>
+                <e-grid-column headerTemplate="#descriptionHeader" field="Description" TextAlign="Right"></e-grid-column>
                 <e-grid-column field="CountryID" visible="false" isPrimaryKey="true" allowEditing="false"></e-grid-column>
             </e-grid-columns>
         </ejs-grid>
@@ -22,23 +24,40 @@
 
 
 @section AdminScripts {
+
+    <script id="countryHeader" type="text/x-template" >
+        <span class="e-icons e-home" style="font-size:15px;" ></span> نام کشور
+    </script>
+
+    <script id="descriptionHeader" type="text/x-template" >
+        <span class="e-icons e-header" style="font-size:15px;" ></span> توضیحات
+    </script>
+
+    <script id="rowNumberTmp" type="text/x-template">
+        <div>
+            ${((+data.index)+1)}
+        </div>
+    </script>
+
+
     <script>
         function createdFunc() {
             // تعریف یک کلاس سفارشی برای پردازش پاسخ دریافتی از سرور
-            class CustomAdaptor extends ej.data.UrlAdaptor{
-                processResponse(data, ds, query, xhr, request, changes){
-                    if(!ej.base.isNullOrUndefined(data.action)){
-                        if(data.action=="fetchgrid"){
+            class CustomAdaptor extends ej.data.UrlAdaptor {
+                processResponse(data, ds, query, xhr, request, changes) {
+                    if (!ej.base.isNullOrUndefined(data.action)) {
+                        if (data.action == "fetchgrid") {
                             $("#spnRowCount").text(data.count);
                         }
-                        if(!ej.base.isNullOrUndefined(data.data)){
+                        if (!ej.base.isNullOrUndefined(data.data)) {
                             return data.data;
-                        }else{
+                        } else {
                             return data;
                         }
                     }
                 }
             }
+
             // دریافت اطلاعات از دیتابیس به روش AJAX و تنظیم منبع داده‌ها برای گرید
             var grid = document.querySelector('#countryList').ej2_instances[0];
             grid.dataSource = new ej.data.DataManager({

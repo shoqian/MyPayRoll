@@ -23,6 +23,9 @@ var app = builder.Build();
 Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(
     "@32392e302e303b32393bKq35AiUSRDJT5uIaFzRCrJWDo7gKUKH1Rwb6jH+WX4o=");
 
+
+app.UseRequestLocalization("fa");
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

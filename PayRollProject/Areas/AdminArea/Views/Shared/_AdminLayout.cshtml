@@ -84,6 +84,18 @@
 <!-- BEGIN: Page Vendor JS-->
 <script asp-append-version="true" src="~/assets/vendors/js/ui/jquery.sticky.js"></script>
 
+<script>
+    let ajax = new ej.base.Ajax(location.origin + '/../../locale/fa.json','GET',false); // بارگزاری فایل فرهنگ و ترجمه
+    ajax.send().then((e) => {
+        let loader = JSON.parse(e);
+        ej.base.L10n.load(
+            loader
+        );
+        ej.base.setCulture('fa'); // فعال کردن 
+    });
+</script>
+
+
 <!-- END: Page Vendor JS-->
 @await RenderSectionAsync("AdminScripts", false)
 
