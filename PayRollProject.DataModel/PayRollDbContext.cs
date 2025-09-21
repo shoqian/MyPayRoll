@@ -1,4 +1,7 @@
-﻿namespace PayRollProject.DataModel
+﻿using PayRollProject.Common.PublicTools;
+using PayRollProject.Entities.BaseClass;
+
+namespace PayRollProject.DataModel
 {
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
@@ -13,11 +16,14 @@
         {
         }
 
-        public DbSet<Countries> Countries_Tbl { get; set; }
+        //// public DbSet<Countries> Countries_Tbl { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            var assembly = typeof(IEntityObject).Assembly;
+            builder.VerifyEntities<IEntityObject>(assembly);
+
             base.OnModelCreating(builder);
             builder.Entity<ApplicationUsers>((EntityTypeBuilder<ApplicationUsers> entity) =>
                 {

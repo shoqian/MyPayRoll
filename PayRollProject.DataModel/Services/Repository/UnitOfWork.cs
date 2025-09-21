@@ -3,7 +3,7 @@
     using PayRollProject.DataModel.Services.Interface;
     using PayRollProject.Entities.Entities;
 
-    public class UnitOfWork : IUnitOfWork,IDisposable
+    public class UnitOfWork : IUnitOfWork, IDisposable
     {
         private readonly PayRollDbContext _context;
         private GenericCRUDClass<ApplicationUsers>? _userManager;
@@ -21,10 +21,11 @@
             // فقط خواندنی
             get
             {
-                if (this._userManager==null)
+                if (this._userManager == null)
                 {
                     this._userManager = new GenericCRUDClass<ApplicationUsers>(this._context);
                 }
+
                 return this._userManager;
             }
         }
@@ -35,7 +36,7 @@
             // فقط خواندنی
             get
             {
-                if (this._roleManager==null)
+                if (this._roleManager == null)
                 {
                     this._roleManager = new GenericCRUDClass<ApplicationRoles>(this._context);
                 }
@@ -53,12 +54,13 @@
                 {
                     this._countriesTbl = new GenericCRUDClass<Countries>(this._context);
                 }
+
                 return this._countriesTbl;
             }
         }
 
         public IEntityTransaction BeginTransaction() => new EntityTransaction(this._context);
-        
+
         public void Save() => this._context.SaveChanges();
 
         public async void SaveAsync() => await this._context.SaveChangesAsync();
