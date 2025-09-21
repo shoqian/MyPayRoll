@@ -1,7 +1,22 @@
-﻿
-@{
+﻿@{
     ViewData["AdminTitle"] = "لیست کشورها";
+    List<object> toolBarItems = new List<object>
+    {
+        "Add",
+        "Edit",
+        "Update",
+        "Cancel",
+        "Delete"
+    };
+
+// toolBarItems.Add("Add");
+    // toolBarItems.Add("Edit");
+    // toolBarItems.Add("Update");
+    // toolBarItems.Add("Cancel");
+    // toolBarItems.Add("Delete");
 }
+
+<link href="~/css/SyncfusionComponentStyle.css" rel="stylesheet"/>
 
 <div style="display: flex; font-size: 13px;">
     <p style="margin-left: 20px;"> تعداد کل کشورها : <span id="spnRowCount"></span></p>
@@ -9,11 +24,13 @@
 
 <div class="row bg-white">
     <div class="col-md-12">
-        <ejs-grid id="countryList" created="createdFunc" allowPaging allowFiltering allowGrouping allowSorting>
+        <ejs-grid id="countryList" created="createdFunc" toolbar="@toolBarItems" toolbarClick="toolbarClickFunc" rowDataBound="indexNumber" allowPaging allowFiltering allowSorting>
             <e-grid-pagesettings pageSize=10 pageCount=3></e-grid-pagesettings>
             <e-grid-filtersettings mode="Immediate" type="Menu"></e-grid-filtersettings>
+            <e-grid-editsettings allowAdding AllowDeleting AllowEditing showDeleteConfirmDialog=true></e-grid-editsettings>
+
             <e-grid-columns>
-                <e-grid-column field="rowIndex" allowediting="false" allowFiltering="false" allowSorting="false" headerText=" " width="40" template="#rowNumberTmp"></e-grid-column>
+                <e-grid-column field="rowIndex" allowediting="false" allowFiltering="false" allowSorting="false" headerText=" " width="40"></e-grid-column>
                 <e-grid-column headerTemplate="#countryHeader" field="CountryName" TextAlign="Right"></e-grid-column>
                 <e-grid-column headerTemplate="#descriptionHeader" field="Description" TextAlign="Right"></e-grid-column>
                 <e-grid-column field="CountryID" visible="false" isPrimaryKey="true" allowEditing="false"></e-grid-column>
@@ -25,29 +42,58 @@
 
 @section AdminScripts {
 
-    <script id="countryHeader" type="text/x-template" >
+    <!-- برای نمایش ستون نام کشور Header Template -->
+    <script id="countryHeader" type="text/x-template">
         <span class="e-icons e-home" style="font-size:15px;" ></span> نام کشور
     </script>
 
-    <script id="descriptionHeader" type="text/x-template" >
+    <!-- #region برای نمایش ستون توضیحات Header Template -->
+    <script id="descriptionHeader" type="text/x-template">
         <span class="e-icons e-header" style="font-size:15px;" ></span> توضیحات
     </script>
 
-    <script id="rowNumberTmp" type="text/x-template">
-        <div>
-            ${((+data.index)+1)}
-        </div>
-    </script>
-
-
     <script>
-        function createdFunc() {
+
+        // برای ایجاد کردن ردیف عدد گذاری برای جدول Row Number
+        let indexNumber = (args) => {
+            let grid = document.getElementById('countryList').ej2_instances[0];
+            if (args.row) {
+                let rowIndex = parseInt(args.row.getAttribute('aria-rowIndex'));
+                let currentPageNumber = grid.pageSettings.currentPage;
+                let pageSize = grid.pageSettings.pageSize;
+                let startIndex = (currentPageNumber - 1) * pageSize;
+                args.row.querySelector('.e-rowcell').innerHTML = (
+                    startIndex + rowIndex
+                ).toString();
+            }
+        }
+
+        // تابع در هنگام ایجاد کردن جدول Create Table
+        function createdFunc(args) {
             ej.base.enableRtl(true);
-            class CustomAdaptor extends ej.data.UrlAdaptor { // تعریف یک کلاس سفارشی برای پردازش پاسخ دریافتی از سرور
+
+            // تعریف یک کلاس سفارشی برای پردازش پاسخ دریافتی از سرور - برای کنترل مقادیر
+            class CustomAdaptor extends ej.data.UrlAdaptor {
                 processResponse(data, ds, query, xhr, request, changes) {
                     if (!ej.base.isNullOrUndefined(data.action)) {
-                        if (data.action == "fetchgrid") {
+                        if (data.action == "fetchGrid") {
                             $("#spnRowCount").text(data.count);
+                        }
+                        if (data.action === "insert") {
+                            alert(`کشور ${data.country} با موفقیت ثبت شد.`);
+                        }
+                        if (data.action === 'update') {
+                            alert(`کشور ${data.country} بروز شد.`);
+                        }
+                        if (data.action === 'delete') {
+                            alert(`کشور ${data.country} حذف شد.`);
+                        }
+                        if (data.action === 'repeat') {
+                            alert(`کشور ${data.country} تکراری میباشد.`);
+                        }
+                        if (data.action === "error") {
+                            alert("در ثبت اطلاعات خطایی رح داده لطفا بررسی کنید." + data.ErrMsg.toString());
+
                         }
                         if (!ej.base.isNullOrUndefined(data.data)) {
                             return data.data;
@@ -59,11 +105,41 @@
             }
 
             // دریافت اطلاعات از دیتابیس به روش AJAX و تنظیم منبع داده‌ها برای گرید
-            var grid = document.querySelector('#countryList').ej2_instances[0];
+            let grid = document.querySelector('#countryList').ej2_instances[0];
             grid.dataSource = new ej.data.DataManager({
                 url: "/AdminArea/CountryManagement/FetchCountryList",
+                insertUrl: "/AdminArea/CountryManagement/Insert",
+                updateUrl: "/AdminArea/CountryManagement/Update",
+                removeUrl: "/AdminArea/CountryManagement/Delete",
                 adaptor: new CustomAdaptor()
             });
+        }
+
+
+        // تابع کنترل دکمه‌های تول بار Toolbar Button Function Or Toolbar Click
+        let toolbarClickFunc = (args) => {
+            switch (args.item.id) {
+            case 'countryList_add':
+                // console.log(args);
+                // alert(`شما دکمه ${args.item.text} را کلیلک کرده اید`);
+                break;
+
+            case 'countryList_edit':
+                // alert(`شما دکمه ${args.item.text} را کلیلک کرده اید`);
+                break;
+
+            case 'countryList_cancel':
+                // alert(`شما دکمه ${args.item.text} را کلیلک کرده اید`);
+                break;
+
+            case 'countryList_update':
+                // alert(`شما دکمه ${args.item.text} را کلیلک کرده اید`);
+                break;
+
+            case 'countryList_delete':
+                // alert(`شما دکمه ${args.item.text} را کلیلک کرده اید`);
+                break;
+            }
         }
     </script>
 }

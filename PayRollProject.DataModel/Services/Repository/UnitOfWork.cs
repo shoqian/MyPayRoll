@@ -6,20 +6,17 @@
     public class UnitOfWork : IUnitOfWork,IDisposable
     {
         private readonly PayRollDbContext _context;
+        private GenericCRUDClass<ApplicationUsers>? _userManager;
+        private GenericCRUDClass<ApplicationRoles>? _roleManager;
+        private GenericCRUDClass<Countries>? _countriesTbl;
 
         public UnitOfWork(PayRollDbContext context)
         {
             this._context = context;
         }
 
-        private GenericCRUDClass<ApplicationUsers>? _userManager;
-        private GenericCRUDClass<ApplicationRoles>? _roleManager;
-        private GenericCRUDClass<Countries>? _countriesTbl;
-
-
-
         // کاربران
-        public GenericCRUDClass<ApplicationUsers> userManager
+        public GenericCRUDClass<ApplicationUsers> UserManager
         {
             // فقط خواندنی
             get
@@ -33,7 +30,7 @@
         }
 
         // نقش‌ها
-        public GenericCRUDClass<ApplicationRoles> roleManager
+        public GenericCRUDClass<ApplicationRoles> RoleManager
         {
             // فقط خواندنی
             get
@@ -48,7 +45,7 @@
         }
 
         // جدول کشورها
-        public GenericCRUDClass<Countries> countriesUW
+        public GenericCRUDClass<Countries> CountriesUw
         {
             get
             {
@@ -60,11 +57,11 @@
             }
         }
 
-        public IEntityTransaction BeginTransaction() => new EntityTransaction(_context);
+        public IEntityTransaction BeginTransaction() => new EntityTransaction(this._context);
         
-        public void Save() => _context.SaveChanges();
+        public void Save() => this._context.SaveChanges();
 
-        public async void SaveAsync() => await _context.SaveChangesAsync();
+        public async void SaveAsync() => await this._context.SaveChangesAsync();
 
 
         public void Dispose()

@@ -1,0 +1,160 @@
+﻿
+.e-grid {
+    font-family: "primary-font", "segoe ui", "tahoma";
+}
+
+.e-input-group, .e-input-group.e-control-wrapper {
+    font-family: "primary-font", "segoe ui", "tahoma";
+}
+
+/*تغيير فونت جدول*/
+.e-control, .e-css {
+    font-family: "primary-font", "segoe ui", "tahoma";
+}
+
+/*تغيير فونت متن در حال نوشتن در جدول*/
+.e-grid .e-row .e-input-group .e-input.e-field {
+    font-family: "primary-font", "segoe ui", "tahoma";
+    font-size: 12px;
+}
+
+/*تغيير استايل هدر جدول*/
+.e-grid .e-headercell {
+    color: darkslateblue;
+    padding: 0px;
+    text-align: center;
+}
+
+/*تغيير فونت هدر جدول*/
+.e-grid .e-headercelldiv {
+    font-size: 13px;
+}
+
+/*تغيير استايل سلولهاي جدول*/
+.e-grid .e-rowcell.customcss {
+    /*background-color: #ecedee;*/
+    font-size: 12px;
+    padding: 4px;
+}
+
+/*تغيير استايل رديف افزوده شده*/
+.e-grid .e-addedrow .e-rowcell {
+    padding: 0px 2px 0px 2px;
+}
+
+/*تغيير استايل رديف در حال ويرايش*/
+.e-grid .e-editedrow .e-rowcell {
+    padding: 0px 2px 0px 2px;
+}
+
+/*تغيير استايل ليست کشويي در رديف افزوده شده */
+.e-ddl.e-input-group.e-control-wrapper .e-input {
+    font-size: 12px !important;
+}
+
+/*تغيير استايل متن وليديشن ها*/
+.e-error {
+    font-family: "primary-font", "segoe ui", "tahoma";
+    font-size: 12px;
+}
+
+/*تغيير استايل تکست باکس مربوط به جستجو در حالت چک باکس و اکسل*/
+/* #moshaver_SearchBox {
+                            font-family: "primary-font", "segoe ui", "tahoma";
+                        } */
+
+/*تغيير استايل محتواي منوي جستجو در حالت چک باکس و اکسل*/
+.e-label {
+    font-family: "primary-font", "segoe ui", "tahoma" !important;
+    font-size: 12px;
+    padding-right: 2px;
+}
+
+/*محتواي چک باکس دار جستجو در حالت چک باکس و اکسل*/
+.e-ftrchk {
+    padding: 0px !important;
+}
+
+/*استايل سلولهاي جدول - ستون عمليات*/
+.e-rowcell.e-unboundcell.e-templatecell {
+    padding: 2px;
+}
+
+.e-headercell.e-lastcell.e-centeralign.e-defaultcursor {
+    padding: 0px;
+}
+
+/*استايل مربوط به کانفرم ديالوگ*/
+.e-lib.e-btn.e-control.okconfirm {
+    font-size: 12px;
+    color: black;
+}
+
+.e-lib.e-btn.e-control.cancelconfirm {
+    font-size: 12px;
+}
+
+/*-----------------استايل هاي مربوط به کنترل آپلودر-------------------*/
+.e-mybuttonclass {
+    width: 23px;
+    height: 23px;
+}
+
+.e-file-select-wrap {
+    border: 1px dashed #afafae;
+    padding: 16px 10px 16px 12px !important;
+}
+
+.e-file-status.e-upload-success {
+    font-family: "primary-font", "segoe ui", "tahoma" !important;
+}
+
+.e-file-status {
+    font-family: "primary-font", "segoe ui", "tahoma" !important;
+}
+
+    .e-file-status.e-validation-fails {
+        font-family: "primary-font", "segoe ui", "tahoma" !important;
+    }
+
+    .e-file-status.e-upload-fails {
+        font-family: "primary-font", "segoe ui", "tahoma" !important;
+    }
+
+.e-upload.e-control-wrapper.e-lib.e-keyboard {
+    border: none !important;
+}
+
+.e-upload {
+    width: 100%;
+    position: relative;
+    margin-top: 15px;
+}
+
+.control_wrapper .e-upload .e-upload-drag-hover {
+    margin: 0;
+}
+
+.e-css.e-btn {
+    font-family: "primary-font", "segoe ui", "tahoma" !important;
+    color: gray;
+    font-size: 12px;
+}
+
+/*-----------------استايل هاي مربوط به کنترل آپلودر-------------------*/
+
+.mycssclass {
+    font-family: "primary-font", "segoe ui", "tahoma";
+    background-color: #176809 !important;
+    border-radius: 3px;
+    color: white !important;
+    padding: 5px 15px 5px 15px;
+}
+
+.publicLoginClass { font-family: "primary-font", Tahoma, Geneva, Verdana, sans-serif !important; }
+
+.color-btn { color: white !important; background-color: #04225a !important; height: 3rem !important; }
+
+.e-icons { font-size: 1rem !important; float: left !important; padding-top: 8px !important; }
+
+.e-arrow-left:before { content: "\e85b"; position: relative; top: -6px; right: 6px; }

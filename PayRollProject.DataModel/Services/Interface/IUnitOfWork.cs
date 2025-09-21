@@ -6,10 +6,11 @@
     public interface IUnitOfWork
     {
         
-        GenericCRUDClass<ApplicationUsers> userManager { get; }
+        GenericCRUDClass<ApplicationUsers> UserManager { get; }
         
-        GenericCRUDClass<ApplicationRoles> roleManager { get; }
-        GenericCRUDClass<Countries> countriesUW { get; }
+        GenericCRUDClass<ApplicationRoles> RoleManager { get; }
+        
+        GenericCRUDClass<Countries> CountriesUw { get; }
 
         IEntityTransaction BeginTransaction();
 

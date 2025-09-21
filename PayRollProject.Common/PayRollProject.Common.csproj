@@ -13,17 +13,11 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.8" />
-
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-
     <PackageReference Include="Syncfusion.EJ2.AspNet.Core" Version="29.1.33" />
-
     <PackageReference Include="Syncfusion.EJ2.JavaScript" Version="29.1.33" />
-
     <PackageReference Include="Syncfusion.EJ2.WordEditor.AspNet.Core" Version="29.1.33" />
-
     <PackageReference Include="Syncfusion.Licensing" Version="29.1.33" />
-
   </ItemGroup>
 
 </Project>

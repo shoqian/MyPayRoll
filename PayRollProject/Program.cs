@@ -15,6 +15,7 @@ builder.Services.AddIdentityService();
 #region Add Services
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IBaseTableRepository, BaseTableRepository>();
 
 #endregion
 
