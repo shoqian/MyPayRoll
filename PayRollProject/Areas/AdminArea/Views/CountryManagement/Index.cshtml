@@ -42,8 +42,8 @@
 
     <script>
         function createdFunc() {
-            // تعریف یک کلاس سفارشی برای پردازش پاسخ دریافتی از سرور
-            class CustomAdaptor extends ej.data.UrlAdaptor {
+            ej.base.enableRtl(true);
+            class CustomAdaptor extends ej.data.UrlAdaptor { // تعریف یک کلاس سفارشی برای پردازش پاسخ دریافتی از سرور
                 processResponse(data, ds, query, xhr, request, changes) {
                     if (!ej.base.isNullOrUndefined(data.action)) {
                         if (data.action == "fetchgrid") {
