@@ -1,3 +1,5 @@
+using Syncfusion.Licensing;
+
 var builder = WebApplication.CreateBuilder(args);
 
 var appSettingConfig = builder.Configuration.SetBasePath(Directory.GetCurrentDirectory())
@@ -16,17 +18,23 @@ builder.Services.AddIdentityService();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IBaseTableRepository, BaseTableRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 #endregion
 
 var app = builder.Build();
 
-Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(
-    "@32392e302e303b32393bKq35AiUSRDJT5uIaFzRCrJWDo7gKUKH1Rwb6jH+WX4o=");
+#region SyncFusion Service
 
+SyncfusionLicenseProvider.RegisterLicense(
+    "@32392e302e303b32393bKq35AiUSRDJT5uIaFzRCrJWDo7gKUKH1Rwb6jH+WX4o=");
 
 app.UseRequestLocalization("fa");
 
+#endregion
+
+
+ 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

@@ -12,7 +12,7 @@
 
         public CountryManagementController(IUnitOfWork context, IBaseTableRepository repository)
         {
-            _context = context;
+            this._context = context;
             this._repository = repository;
         }
 
@@ -24,7 +24,7 @@
 
         public IActionResult FetchCountryList([FromBody] DataManagerRequest dm)
         {
-            IEnumerable dataSource = _context.CountriesUw.Get();
+            IEnumerable dataSource = this._context.CountriesUw.Get();
             var dt = dataSource.Cast<Countries>();
             int count = dt.Count();
 
@@ -58,7 +58,6 @@
                 ? Json(new { result = dataSource, action = "fetchGrid", count = count })
                 : Json(dataSource);
         }
-
 
         public IActionResult Insert([FromBody] CRUDModel<Countries> model)
         {

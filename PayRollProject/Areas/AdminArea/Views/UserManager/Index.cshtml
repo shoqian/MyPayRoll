@@ -1,0 +1,357 @@
+﻿@model List<PayRollProject.DataModel.ViewModel.ApplicationUserViewModel>
+@using Syncfusion.EJ2.Grids
+
+@{
+    ViewData["AdminTitle"] = "مدیریت کاربران";
+}
+
+<link type="text/css" rel="stylesheet" href="~/css/SyncfusionComponentStyle.css"/>
+<div style="display: flex; font-size: 13px;">
+    <p style="margin-left: 20px;">تعداد کاربران<span id="spnAllUser"></span></p>
+    <p style="margin-left: 20px;">تعداد کاربران فعال<span id="spnActiveUser"></span></p>
+    <p>تعداد کاربران غیرفعال<span id="spnDeactivUser"></span></p>
+</div>
+
+<div class="col-md-12 alert" style="text-align: right; background-color: #efcdc3; padding: 3px; color: black; font-size: 13px; margin-bottom: 10px;">
+    <span>
+        توجه : کاربرانی که به رنگ قرمز هستند، اکانت آنها غیرفعال می باشد و امکان کار با سیستم را ندارند.
+    </span>
+</div>
+
+<div class="row bg-white">
+    <div class="col-md-12">
+
+        <ejs-grid id="systemUser" created="createdFunc" rowDataBound="indexNumber" gridLines="Both" actionComplete="actionCompleteFunc" 
+                  load="loadFunc" allowFiltering allowSorting allowPaging 
+                  toolbar='@(new List<string>() { "Add", "Edit", "Update", "Cancel" })'>
+
+            <e-grid-pagesettings pageSize="10" pageCount="6"></e-grid-pagesettings>
+            <e-grid-filtersettings mode="OnEnter" type="Menu"></e-grid-filtersettings>
+            <e-grid-editsettings allowAdding allowEditing allowDeleting="false" mode="Dialog"></e-grid-editsettings>
+
+            <e-grid-columns>
+                <e-grid-column field="rowIndex" headerText="ردیف"  width="100" allowEditing="false" allowFiltering="false" allowSorting="false"></e-grid-column>
+
+
+                <e-grid-column headerText="نام" field="FirstName" textAlign="Center" customAttributes="@(new { @class = "customCss" })"></e-grid-column>
+                <e-grid-column headerText="نام حانوادگی" field="Family" textAlign="Center" customAttributes="@(new { @class = "customCss" })"></e-grid-column>
+
+
+                <e-grid-column headerText="شماره تماس" field="PhoneNumber" textAlign="Center" customAttributes="@(new { @class = "customCss" })"></e-grid-column>
+                <e-grid-column headerText="کد ملی" field="MelliCode" textAlign="Center" customAttributes="@(new { @class = "customCss" })"></e-grid-column>
+                <e-grid-column headerText="ایمیل" field="Email" textAlign="Center" customAttributes="@(new { @class = "customCss" })"></e-grid-column>
+
+                <e-grid-column headerText="نوع کاربری"  field="UserTypeText" editType="dropdownedit" edit="@(new { create = "createEditType", reade = "readeEditType", destroy = "destroyEditType", write = "writeEditType" })"textAlign="Center" customAttributes="@(new { @class = "customCss" })"></e-grid-column>
+
+                <e-grid-column headerText="جنسیت" field="GenderText" editType="dropdownedit" edit="@(new { create = "createGender", read = "readGender", destroy = "destroyGender", write = "writeGender" })" textAlign="Center" customAttributes="@(new { @class = "customCss" })"></e-grid-column>
+
+                <e-grid-column headerText="وضعیت کاربر" field="UserFlagText" editType="dropdownedit" edit="@(new { create = "createUserFlag", read = "readUserFlag", destroy = "destroyUserFlag", write = "writeUserFlag" })" textAlign="Center" customAttributes="@(new { @class = "customCss" })"></e-grid-column>
+
+                <e-grid-column field="UserId" visible="false" isPrimaryKey allowEditing="false"></e-grid-column>
+                <e-grid-column headerText="عملیات" textAlign="Center"></e-grid-column>
+            </e-grid-columns>
+        </ejs-grid>
+    </div>
+</div>
+
+
+@* <div class="control-section"> *@
+@*     @Html.EJS().Grid("systemUser1").DataSource(@Model).Columns(col => *@
+@* { *@
+@* col.Field("UserId").IsPrimaryKey(true).ShowInColumnChooser(false).Visible(false).ValidationRules(new{required=true,number=true}).Add(); *@
+@* *@
+@* col.HeaderText("نام و نام حانوادگی").TextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).Columns(new List<Syncfusion.EJ2.Grids.GridColumn>() *@
+@*     { *@
+@*         new GridColumn {Field = "FirstName",Width = "150",HeaderText = "نام",MinWidth = "90",TextAlign = Syncfusion.EJ2.Grids.TextAlign.Center}, *@
+@*         new GridColumn {Field = "Family",Width = "150",TextAlign = Syncfusion.EJ2.Grids.TextAlign.Center,HeaderText = "نام خانوادگی",} *@
+@*     }).Add(); *@
+@* *@
+@*     col.HeaderText("وضعیت کاربری").TextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).Columns(new List<Syncfusion.EJ2.Grids.GridColumn>() *@
+@*     { *@
+@*         new GridColumn { Field = "UserTypeText",HeaderText = "نوع کاربری",Width = "150",TextAlign = Syncfusion.EJ2.Grids.TextAlign.Center}, *@
+@*         new GridColumn { Field = "GenderText" ,HeaderText = "جنسیت",Width = "150",TextAlign = Syncfusion.EJ2.Grids.TextAlign.Center}, *@
+@*         new GridColumn { Field = "UserFlagText" ,HeaderText = "فعال/غیرفعال",Width = "150",TextAlign = Syncfusion.EJ2.Grids.TextAlign.Center} *@
+@*     }).Add(); *@
+@* *@
+@* }).Render() *@
+@* </div> *@
+
+@section AdminScripts
+{
+
+    @* // استفاده از تملیت که نقص دارد و برای فقط یادآوری میگذارم. *@
+    @* <script id="rowNumberTmp" type="text/x-template"> *@
+    @*     <div> *@
+    @*         ${((+data.index) + 1)} *@
+    @*     </div> *@
+    @* </script> *@
+
+
+    <!-- برای تعریف ردیف جدول -->
+    <script>
+        let indexNumber = (args) => {
+            let grid = $("#systemUser").ej2_instances[0];
+            if (args.row) {
+                let rowIndex = parseInt(args.row.getAttribute('aria-rowIndex'));
+                let currentPageNumber = grid.pageSettings.currentPage;
+                let pageSize = grid.pageSettings.pageSize;
+                let startIndex = (currentPageNumber - 1) * pageSize;
+                args.row.$('.e-rowcell').innerHTML = (startIndex + rowIndex).toString();
+            }
+        }
+    </script>
+
+    <!-- برای تولید اولیه جدول این تابع اجرا میشود که با Attribute => created="createdFunc" -->
+    <script>
+        function createdFunc(args) {
+            ej.base.enableRtl(true);
+
+            class customAdaptor extends ej.data.UrlAdaptor {
+                processResponse (data, ds, query, xhr, request, changes) {
+                    if (!ej.base.isNullOrUndefined(data.action)) {
+                        if (data.action === "fetchGrid") {
+
+                        }
+                        switch (data.action) {
+                        case "insert":
+                            alert(`${data.user} با موفقیت ثبت شد.`);
+                            break;
+
+                        case "update":
+                            alert(`${data.user} با موفقیت بروز شد.`);
+                            break;
+
+                        case "repeat":
+                            alert(`نام کاربری ${data.user} تکراری است.`);
+                            break;
+
+                        case "delete":
+                            alert(`${data.user} با موفقیت حذف شد.`);
+                            break;
+
+                        case "error":
+                            alert("در ثبت اطلاعات خطایی رح داده لطفا بررسی کنید." + data.ErrMsg.toString());
+                            break;
+
+                        default:
+                            return data;
+                        }
+                        if (!ej.base.isNullOrUndefined(data.data)) {
+                            return data.data;
+                        } else {
+                            return data;
+                        }
+                    }
+                }
+            }
+
+            // دریافت اطلاعات از دیتابیس به روش ایجکس و تنظیم منبع داده ها برای گرید.
+            let grid = document.querySelector('#systemUser').ej2_instances[0];
+            grid.dataSource = new ej.data.DataManager({
+                url: "/AdminArea/UserManager/FetchUserList",
+                insertUrl: "/AdminArea/UserManager/Insert",
+                updateUrl: "/AdminArea/UserManager/Update",
+                removeUrl: "/AdminArea/UserManager/Delete",
+                adaptor: new customAdaptor()
+            });
+
+        }
+
+    </script>
+
+    <!-- Generate DropDown For Gender -->
+    <!-- تعریف کردن دکمه دراپدان برای فیلد جنسیت -->
+    <script>
+        let genderType,
+            genderTypeObj,
+            genderTypeValue = [
+                { text: "آقا", value: 1 },
+                { text: "خانم", value: 2 }
+            ];
+
+        function createGender() {
+            genderType = document.createElement('input');
+            return genderType;
+        }
+
+        let readGender = () => { return genderTypeObj.value; }
+
+        let destroyGender = () => genderTypeObj.destroy();
+
+        function writeGender(argument) {
+            genderTypeObj = new ej.dropdowns.DropDownList({
+                dataSource: genderTypeValue,
+                fields: { value: 'value', text: 'text' },
+                placeholder: '- جنسیت -',
+                floatLabelType: 'Never'
+            });
+            genderTypeObj.appendTo(genderType);
+        }
+
+    </script>
+
+    <!-- Generate DropDown For EditType -->
+    <!-- تعریف کردن دکمه دراپدان برای فیلد نوع کاربری -->
+    <script>
+        let editType,
+            editTypeObj,
+            editTypeValue = [
+                { text: "مدیر", value: 1 },
+                { text: "کاربر", value: 2 }
+            ];
+
+        function createEditType() {
+            editType = document.createElement('input');
+            return editType;
+        }
+
+        let readeEditType = () => { return editTypeObj.value; }
+
+        let destroyEditType = () => editTypeObj.destroy();
+
+        function writeEditType(argument) {
+            editTypeObj = new ej.dropdowns.DropDownList({
+                dataSource: editTypeValue,
+                fields: { value: 'value', text: 'text' },
+                placeholder: '- نوع کاربری -',
+                floatLabelType: 'Never'
+            });
+            editTypeObj.appendTo(editType);
+        }
+    </script>
+
+    <!-- Generate DropDown For UserFlag -->
+    <!-- تعریف کردن دکمه دراپدان برای فیلد وضعیت کاربر -->
+    <script>
+        let userFlagType,
+            userFlagTypeObj,
+            userFlagValue = [
+                { text: "فعال", value: 1 },
+                { text: "غیرفعال", value: 2 }
+            ];
+
+        function createUserFlag() {
+            userFlagType = document.createElement('input');
+            return userFlagType;
+        }
+
+        let readeUserFlag = () => { return userFlagTypeObj.value; }
+
+        let destroyUserFlag = () => userFlagTypeObj.destroy();
+
+        function writeUserFlag(argument) {
+            userFlagTypeObj = new ej.dropdowns.DropDownList({
+                dataSource: userFlagValue,
+                fields: { value: 'value', text: 'text' },
+                placeholder: '- وضعیت کاربر -',
+                floatLabelType: 'Never',
+                align: 'Center'
+            });
+            userFlagTypeObj.appendTo(userFlagType);
+        }
+    </script>
+
+    <!-- Generate Action Complete Function -->
+    <!-- تعریف تابعی برای اتوکامپلیت -->
+    <script>
+        function actionCompleteFunc(argument) {
+            $("input").attr("autoComplete", "off");
+
+            console.log(argument);
+
+            if (argument.requestType == "add" || argument.requestType == "beginEdit") {
+                let statusVar = "systemUserUserFlagText";
+                argument.form.elements[statusVar].ej2_instances[0].enabled = false;
+                argument.form.elements[statusVar].ej2_instances[0].refresh();
+            }
+            if (argument.requestType == "beginEdit") {
+                let statusVar = "systemUserUserTypeText";
+                argument.form.elements[statusVar].ej2_instances[0].enabled = false;
+                argument.form.elements[statusVar].ej2_instances[0].refresh();
+            }
+
+        }
+    </script>
+
+    <!-- Load Function - Validation -->
+    <!-- تابع در هنگام لود جدول و برای اعتبارسنجی داده های ورودی -->
+    <script>
+
+
+        function loadFunc() {
+            this.columns[1].validationRules = { required: [true, "نام وارد نشده است."] }; // فیلد نام
+            this.columns[2].validationRules = { required: [true, "نام خانوادگی وارد نشده است."] }; // فیلد نام خانوادگی
+            this.columns[3].validationRules = { // فیلد شماره تلفن که همون موبایل رو بررسی میکنه
+                required: [true, "شماره تلفن وارد نشده است."],
+                tel: [true, "ورودی باید شامل شماره تلفن باشد."],
+                regularExpression: ["^09\d{9}$", "تعداد کاراکتر های تفن باید 11 رقم می باشد."]
+            };
+            this.columns[4].validationRules = { // فیلد کد ملی
+                required: [true, "کدملی وارد نشده است."],
+                maxLength: [10, "کدملی نباید از 10 کاراکتر بیشتر باشد."],
+                minLength: [10, "کدملی نباید از 10 کاراکتر کمتر باشد."],
+                regularExpression: ["\d{10}$", "کدملی باید حتما 10 رقمی باشد، بدون خط تیره."]
+            };
+            this.columns[5].validationRules = { // فیلد ایمیل
+                required: [true, "وارد کردن ایمیل اجباری است."],
+                email: [true, "ایمیل وارد شده نا معتبر است."]
+            }
+        }
+    </script>
+
+    <!-- تست کد ملی -->
+    <script>
+
+        // تابع اعتبارسنجی کد ملی
+        let validationNationalCode = (code) => {
+
+
+            //            let reg = /^\d(10)$/;
+            let reg = /^[0-9]{10}$/;
+            if (!reg.test(code)) {
+                return false;
+            }
+            if (code.length !== 10) {
+                return false;
+            }
+
+            let coefficients = [29, 27, 23, 21, 19, 17, 13, 11, 7, 3];
+            let coefficientsNew = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
+            let sum = 0;
+            for (let i = 0; i < 9; i++) {
+                sum += parseInt(code[i]) * coefficientsNew[i];
+            }
+            let reminder = sum % 11;
+            let controlDigit = parseInt(code[9]);
+            if (reminder < 2 && reminder === controlDigit) {
+                return true;
+            }
+            if (reminder >= 2 && (11 - reminder) === controlDigit) {
+                return true;
+            }
+
+            return false;
+        }
+
+        function checkCodeMelli(code) {
+
+            let L = code.length;
+
+            if (L < 8 || parseInt(code, 10) === 0) return false;
+            code = ('0000' + code).substr(L + 4 - 10);
+            if (parseInt(code.substr(3, 6), 10) === 0) return false;
+            let c = parseInt(code.substr(9, 1), 10);
+            let s = 0;
+            for (let i = 0; i < 9; i++)
+                s += parseInt(code.substr(i, 1), 10) * (10 - i);
+            s = s % 11;
+            return (s < 2 && c === s) || (s >= 2 && c === (11 - s));
+            return true;
+        }
+
+
+//        console.log("code melli man : " + validationNationalCode("0075921812"));
+//        console.log("code melli man : " + checkCodeMelli("0075921812"));
+    </script>
+
+}

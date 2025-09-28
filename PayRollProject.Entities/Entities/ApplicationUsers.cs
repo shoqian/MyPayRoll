@@ -10,8 +10,8 @@
 
         public string MelliCode { get; set; }
         
-        //// 1 = user
-        //// 2 = admin
+        //// 1 = admin
+        //// 2 = user
         public byte UserType { get; set; }
         
         //// 1 = male
