@@ -1,160 +1,267 @@
-﻿
-.e-grid {
-    font-family: "primary-font", "segoe ui", "tahoma";
+﻿:root {
+	/* اندازه و ظاهر نقطه به‌صورت متغیر؛ به سادگی تم/سایز را عوض کنید */
+	--status-size: 1rem; /* قطر نقطه؛ با فونت هم‌مقیاس می‌شود */
+	--status-ring: #000; /* رنگ حلقه‌ی جداکننده از آواتار/پس‌زمینه */
+	--status-offset: 0; /* در صورت نیاز به بیرون‌زدگی از قاب */
+	--dot-size: .8rem;
+	--ring-color: #989;
+	--dot-top: 0;
+	--dot-left:20px;
+	
 }
 
-.e-input-group, .e-input-group.e-control-wrapper {
-    font-family: "primary-font", "segoe ui", "tahoma";
+.user-status {
+ /* اگر پس‌زمینهٔ شما روشن/تیره است این را عوض کنید */
+	position: relative;
+	display: inline-block;
+	inline-size: var(--dot-size);
+	block-size: var(--dot-size);
+	vertical-align: middle;
 }
+
+.user-status::before {
+	content: "";
+	position: absolute;
+	top:var(--dot-top);
+	left:var(--dot-left);
+	width:var(--dot-size);
+	height:var(--dot-size);
+	border-radius: 50%;
+	background: var(--dot-color, #ef4444); /* پیش‌فرض: قرمز */
+	box-shadow: 0 0 0 2px var(--ring-color); /* حلقه برای وضوح */
+}
+
+/* نگاشت سادهٔ دو حالت */
+.user-status.active::before {
+	--dot-color: #22c55e;
+}
+/* سبز */
+.user-status.deactivate::before {
+	--dot-color: #ef4444;
+}
+/* قرمز */
+
+
+
+
+
+
+
+.e-grid { font-family: "primary-font", "segoe ui", "tahoma"; }
+
+.e-input-group, .e-input-group.e-control-wrapper { font-family: "primary-font", "segoe ui", "tahoma"; }
 
 /*تغيير فونت جدول*/
-.e-control, .e-css {
-    font-family: "primary-font", "segoe ui", "tahoma";
-}
+
+.e-control, .e-css { font-family: "primary-font", "segoe ui", "tahoma"; }
 
 /*تغيير فونت متن در حال نوشتن در جدول*/
+
 .e-grid .e-row .e-input-group .e-input.e-field {
-    font-family: "primary-font", "segoe ui", "tahoma";
-    font-size: 12px;
+	font-family: "primary-font", "segoe ui", "tahoma";
+	font-size: 12px;
 }
 
 /*تغيير استايل هدر جدول*/
+
 .e-grid .e-headercell {
-    color: darkslateblue;
-    padding: 0px;
-    text-align: center;
+	color: darkslateblue;
+	padding: 0px;
+	text-align: center;
 }
+
+/* CSS برای رنگ‌آمیزی ردیف‌های زوج گرید Syncfusion */
+
+.e-grid .e-row {
+	background-color: #89E18D !important; /* رنگ پس‌زمینه دلخواه برای ردیف‌های فرد */
+	border: solid 1px #222 !important;
+}
+
+
+/* CSS برای رنگ‌آمیزی ردیف‌های زوج گرید Syncfusion */
+
+tr > .e-altrow {
+	background-color: #D8FFBE !important; /* رنگ پس‌زمینه دلخواه برای ردیف‌های زوج */
+}
+
+
+/* .e-grid .e-row.even-row { */
+
+/* 	background-color: #f8f9fa; */
+
+/* } */
+
+/* */
+
+/* .e-grid .e-row.odd-row { */
+
+/* 	background-color: #ffffff; */
+
+/* } */
+
+.e-grid .e-row:hover { background-color: #78D6E1 !important; }
+
+
 
 /*تغيير فونت هدر جدول*/
-.e-grid .e-headercelldiv {
-    font-size: 13px;
-}
+
+.e-grid .e-headercelldiv { font-size: 13px; }
 
 /*تغيير استايل سلولهاي جدول*/
+
 .e-grid .e-rowcell.customCss {
-    /*background-color: #ecedee;*/
-    font-size: 12px;
-    padding: 4px;
+	/*background-color: #ecedee;*/
+	font-size: 12px;
+	padding: 4px;
 }
 
 /*تغيير استايل رديف افزوده شده*/
-.e-grid .e-addedrow .e-rowcell {
-    padding: 0px 2px 0px 2px;
-}
+
+.e-grid .e-addedrow .e-rowcell { padding: 0px 2px 0px 2px; }
 
 /*تغيير استايل رديف در حال ويرايش*/
-.e-grid .e-editedrow .e-rowcell {
-    padding: 0px 2px 0px 2px;
-}
+
+.e-grid .e-editedrow .e-rowcell { padding: 0px 2px 0px 2px; }
 
 /*تغيير استايل ليست کشويي در رديف افزوده شده */
-.e-ddl.e-input-group.e-control-wrapper .e-input {
-    font-size: 12px !important;
-}
+
+.e-ddl.e-input-group.e-control-wrapper .e-input { font-size: 12px !important; }
 
 /*تغيير استايل متن وليديشن ها*/
+
 .e-error {
-    font-family: "primary-font", "segoe ui", "tahoma";
-    font-size: 12px;
+	font-family: "primary-font", "segoe ui", "tahoma";
+	font-size: 12px;
 }
 
 /*تغيير استايل تکست باکس مربوط به جستجو در حالت چک باکس و اکسل*/
+
 /* #moshaver_SearchBox {
                             font-family: "primary-font", "segoe ui", "tahoma";
                         } */
 
 /*تغيير استايل محتواي منوي جستجو در حالت چک باکس و اکسل*/
+
 .e-label {
-    font-family: "primary-font", "segoe ui", "tahoma" !important;
-    font-size: 12px;
-    padding-right: 2px;
+	font-family: "primary-font", "segoe ui", "tahoma" !important;
+	font-size: 12px;
+	padding-right: 2px;
 }
 
 /*محتواي چک باکس دار جستجو در حالت چک باکس و اکسل*/
-.e-ftrchk {
-    padding: 0px !important;
-}
+
+.e-ftrchk { padding: 0px !important; }
 
 /*استايل سلولهاي جدول - ستون عمليات*/
-.e-rowcell.e-unboundcell.e-templatecell {
-    padding: 2px;
-}
 
-.e-headercell.e-lastcell.e-centeralign.e-defaultcursor {
-    padding: 0px;
-}
+.e-rowcell.e-unboundcell.e-templatecell { padding: 2px; }
+
+.e-headercell.e-lastcell.e-centeralign.e-defaultcursor { padding: 0px; }
 
 /*استايل مربوط به کانفرم ديالوگ*/
+
 .e-lib.e-btn.e-control.okconfirm {
-    font-size: 12px;
-    color: black;
+	font-size: 12px;
+	color: black;
 }
 
-.e-lib.e-btn.e-control.cancelconfirm {
-    font-size: 12px;
-}
+.e-lib.e-btn.e-control.cancelconfirm { font-size: 12px; }
 
 /*-----------------استايل هاي مربوط به کنترل آپلودر-------------------*/
+
 .e-mybuttonclass {
-    width: 23px;
-    height: 23px;
+	width: 23px;
+	height: 23px;
 }
 
 .e-file-select-wrap {
-    border: 1px dashed #afafae;
-    padding: 16px 10px 16px 12px !important;
+	border: 1px dashed #afafae;
+	padding: 16px 10px 16px 12px !important;
 }
 
-.e-file-status.e-upload-success {
-    font-family: "primary-font", "segoe ui", "tahoma" !important;
-}
+.e-file-status.e-upload-success { font-family: "primary-font", "segoe ui", "tahoma" !important; }
 
-.e-file-status {
-    font-family: "primary-font", "segoe ui", "tahoma" !important;
-}
+.e-file-status { font-family: "primary-font", "segoe ui", "tahoma" !important; }
 
-    .e-file-status.e-validation-fails {
-        font-family: "primary-font", "segoe ui", "tahoma" !important;
-    }
+.e-file-status.e-validation-fails { font-family: "primary-font", "segoe ui", "tahoma" !important; }
 
-    .e-file-status.e-upload-fails {
-        font-family: "primary-font", "segoe ui", "tahoma" !important;
-    }
+.e-file-status.e-upload-fails { font-family: "primary-font", "segoe ui", "tahoma" !important; }
 
-.e-upload.e-control-wrapper.e-lib.e-keyboard {
-    border: none !important;
-}
+.e-upload.e-control-wrapper.e-lib.e-keyboard { border: none !important; }
 
 .e-upload {
-    width: 100%;
-    position: relative;
-    margin-top: 15px;
+	width: 100%;
+	position: relative;
+	margin-top: 15px;
 }
 
-.control_wrapper .e-upload .e-upload-drag-hover {
-    margin: 0;
-}
+.control_wrapper .e-upload .e-upload-drag-hover { margin: 0; }
 
 .e-css.e-btn {
-    font-family: "primary-font", "segoe ui", "tahoma" !important;
-    color: gray;
-    font-size: 12px;
+	font-family: "primary-font", "segoe ui", "tahoma" !important;
+	color: gray;
+	font-size: 12px;
 }
 
 /*-----------------استايل هاي مربوط به کنترل آپلودر-------------------*/
 
 .mycssclass {
-    font-family: "primary-font", "segoe ui", "tahoma";
-    background-color: #176809 !important;
-    border-radius: 3px;
-    color: white !important;
-    padding: 5px 15px 5px 15px;
+	font-family: "primary-font", "segoe ui", "tahoma";
+	background-color: #176809 !important;
+	border-radius: 3px;
+	color: white !important;
+	padding: 5px 15px 5px 15px;
 }
 
 .publicLoginClass { font-family: "primary-font", Tahoma, Geneva, Verdana, sans-serif !important; }
 
-.color-btn { color: white !important; background-color: #04225a !important; height: 3rem !important; }
+.color-btn {
+	color: white !important;
+	background-color: #04225a !important;
+	height: 3rem !important;
+}
 
-.e-icons { font-size: 1rem !important; float: left !important; padding-top: 8px !important; }
+.e-icons {
+	font-size: 1rem !important;
+	float: left !important;
+	padding-top: 8px !important;
+}
 
-.e-arrow-left:before { content: "\e85b"; position: relative; top: -6px; right: 6px; }
+.e-arrow-left:before {
+	content: "\e85b";
+	position: relative;
+	top: -6px;
+	right: 6px;
+}
+
+
+
+/* 2) یا از outline روی خود ردیف استفاده کنید (بچه‌ها کمتر آن را می‌پوشانند) */
+
+.e-grid .e-row {
+	background-color: #D7F7D9 !important;
+	outline: .5px solid #2656AB !important;
+	outline-offset: -1px;
+}
+
+/* 1) مرز بین ردیف‌ها را روی سلول‌ها بگذارید (معمولاً واضح‌تر است) */
+
+.e-grid tr.e-altrow {
+	background-color: #8DEC91 !important;
+	border: .5px solid #73B5CB !important;
+}
+
+.e-grid tr.deactivate{
+	background-color : #E4B8B8 !important;
+}
+
+.e-grid tr.currentUser{
+	background-color: #EAEF19 !important;
+}
+
+/* .e-grid e-row :hover { */
+/* 	background-color: #2E2424 !important; */
+/* 	color: #fff !important; */
+/* 	border:1px dashed red; */
+/* } */
+

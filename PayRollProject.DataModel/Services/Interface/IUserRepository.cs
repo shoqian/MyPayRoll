@@ -5,5 +5,9 @@
     public interface IUserRepository
     {
         List<UserListDTO> GetUserList();
+        
+        void DeactivateUser(string melliCode);
+
+        void ActiveUser(string melliCode);
     }
 }

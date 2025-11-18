@@ -5,7 +5,7 @@
 
     public interface IEntityObject
     {
-        // این اینترفیس جهت تشحیص کلاس های مربوط به جداول از سایر کلاسها استفاده می شود
+        // این اینترفیس جهت تشحیص کلاس‌های مربوط به جداول از سایر کلاسها استفاده می‌شود
     }
 
 
@@ -13,9 +13,9 @@
     {
         public string UserID { get; set; }
 
-        public DateTime CrateDateTime { get; set; }
+        public DateTime CreateDateTime { get; set; }
 
-        [ForeignKey("UserID")]
+        [ForeignKey(nameof(UserID))]
         public virtual ApplicationUsers Users { get; set; }
     }
 }

@@ -246,6 +246,86 @@ namespace PayRollProject.DataModel.Migrations
                     b.ToTable("UsersTbl", (string)null);
                 });
 
+            modelBuilder.Entity("PayRollProject.Entities.Entities.AuditLog", b =>
+                {
+                    b.Property<long>("AuditId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("AuditId"));
+
+                    b.Property<string>("DateAfter")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DateBefore")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Diff")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EntityKey")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("EntityName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Operation")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime>("Timestamp")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("AuditId");
+
+                    b.ToTable("AuditLogs", (string)null);
+                });
+
+            modelBuilder.Entity("PayRollProject.Entities.Entities.Cities", b =>
+                {
+                    b.Property<int>("City_ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("City_ID"));
+
+                    b.Property<string>("City_Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime>("CreateDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ID_Province")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Prefix")
+                        .IsRequired()
+                        .HasMaxLength(4)
+                        .HasColumnType("nvarchar(4)");
+
+                    b.Property<string>("UserID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("City_ID");
+
+                    b.HasIndex("ID_Province");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("Cities");
+                });
+
             modelBuilder.Entity("PayRollProject.Entities.Entities.Countries", b =>
                 {
                     b.Property<int>("CountryID")
@@ -258,7 +338,7 @@ namespace PayRollProject.DataModel.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CrateDateTime")
+                    b.Property<DateTime>("CreateDateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -276,6 +356,214 @@ namespace PayRollProject.DataModel.Migrations
                     b.ToTable("Countries");
                 });
 
+            modelBuilder.Entity("PayRollProject.Entities.Entities.GeoCounties", b =>
+                {
+                    b.Property<int>("GeoCounty_ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GeoCounty_ID"));
+
+                    b.Property<string>("County_Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime>("CreateDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("GeoProvince_ID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("GeoCounty_ID");
+
+                    b.HasIndex("GeoProvince_ID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("GeoCounties");
+                });
+
+            modelBuilder.Entity("PayRollProject.Entities.Entities.GeoDistricts", b =>
+                {
+                    b.Property<int>("GeoDistricts_ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GeoDistricts_ID"));
+
+                    b.Property<DateTime>("CreateDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Districts_Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("GeoCounty_ID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GeoProvince_ID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("GeoDistricts_ID");
+
+                    b.HasIndex("GeoCounty_ID");
+
+                    b.HasIndex("GeoProvince_ID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("GeoDistricts");
+                });
+
+            modelBuilder.Entity("PayRollProject.Entities.Entities.GeoNeighborhoods", b =>
+                {
+                    b.Property<int>("GeoNeighborhoods_ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GeoNeighborhoods_ID"));
+
+                    b.Property<string>("City_Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime>("CreateDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("GeoCounty_ID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GeoDistricts_ID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GeoProvince_ID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GeoRuralDistricts_ID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Neighborhoods_Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("UserID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("GeoNeighborhoods_ID");
+
+                    b.HasIndex("GeoCounty_ID");
+
+                    b.HasIndex("GeoDistricts_ID");
+
+                    b.HasIndex("GeoProvince_ID");
+
+                    b.HasIndex("GeoRuralDistricts_ID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("GeoNeighborhoods");
+                });
+
+            modelBuilder.Entity("PayRollProject.Entities.Entities.GeoProvinces", b =>
+                {
+                    b.Property<int>("GeoProvince_ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GeoProvince_ID"));
+
+                    b.Property<DateTime>("CreateDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Province_Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("UserID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("GeoProvince_ID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("GeoProvinces");
+                });
+
+            modelBuilder.Entity("PayRollProject.Entities.Entities.GeoRuralDistricts", b =>
+                {
+                    b.Property<int>("GeoRuralDistricts_ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GeoRuralDistricts_ID"));
+
+                    b.Property<DateTime>("CreateDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("GeoCounty_ID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GeoDistricts_ID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GeoProvince_ID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("RuralDistricts_Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("UserID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("GeoRuralDistricts_ID");
+
+                    b.HasIndex("GeoCounty_ID");
+
+                    b.HasIndex("GeoDistricts_ID");
+
+                    b.HasIndex("GeoProvince_ID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("GeoRuralDistricts");
+                });
+
+            modelBuilder.Entity("PayRollProject.Entities.Entities.Provinces", b =>
+                {
+                    b.Property<int>("ID_Province")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID_Province"));
+
+                    b.Property<string>("Province_Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("ID_Province");
+
+                    b.ToTable("Provinces");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("PayRollProject.Entities.Entities.ApplicationRoles", null)
@@ -290,7 +578,7 @@ namespace PayRollProject.DataModel.Migrations
                     b.HasOne("PayRollProject.Entities.Entities.ApplicationUsers", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -299,7 +587,7 @@ namespace PayRollProject.DataModel.Migrations
                     b.HasOne("PayRollProject.Entities.Entities.ApplicationUsers", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -314,7 +602,7 @@ namespace PayRollProject.DataModel.Migrations
                     b.HasOne("PayRollProject.Entities.Entities.ApplicationUsers", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -323,8 +611,27 @@ namespace PayRollProject.DataModel.Migrations
                     b.HasOne("PayRollProject.Entities.Entities.ApplicationUsers", null)
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("PayRollProject.Entities.Entities.Cities", b =>
+                {
+                    b.HasOne("PayRollProject.Entities.Entities.Provinces", "Province")
+                        .WithMany("Cities")
+                        .HasForeignKey("ID_Province")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("PayRollProject.Entities.Entities.ApplicationUsers", "Users")
+                        .WithMany()
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Province");
+
+                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("PayRollProject.Entities.Entities.Countries", b =>
@@ -332,10 +639,170 @@ namespace PayRollProject.DataModel.Migrations
                     b.HasOne("PayRollProject.Entities.Entities.ApplicationUsers", "Users")
                         .WithMany()
                         .HasForeignKey("UserID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("PayRollProject.Entities.Entities.GeoCounties", b =>
+                {
+                    b.HasOne("PayRollProject.Entities.Entities.GeoProvinces", "Province")
+                        .WithMany("Counties")
+                        .HasForeignKey("GeoProvince_ID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PayRollProject.Entities.Entities.ApplicationUsers", "Users")
+                        .WithMany()
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Province");
+
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("PayRollProject.Entities.Entities.GeoDistricts", b =>
+                {
+                    b.HasOne("PayRollProject.Entities.Entities.GeoCounties", "County")
+                        .WithMany("Districts")
+                        .HasForeignKey("GeoCounty_ID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PayRollProject.Entities.Entities.GeoProvinces", "Province")
+                        .WithMany()
+                        .HasForeignKey("GeoProvince_ID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PayRollProject.Entities.Entities.ApplicationUsers", "Users")
+                        .WithMany()
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("County");
+
+                    b.Navigation("Province");
+
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("PayRollProject.Entities.Entities.GeoNeighborhoods", b =>
+                {
+                    b.HasOne("PayRollProject.Entities.Entities.GeoCounties", "County")
+                        .WithMany()
+                        .HasForeignKey("GeoCounty_ID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PayRollProject.Entities.Entities.GeoDistricts", "District")
+                        .WithMany()
+                        .HasForeignKey("GeoDistricts_ID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PayRollProject.Entities.Entities.GeoProvinces", "Province")
+                        .WithMany()
+                        .HasForeignKey("GeoProvince_ID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PayRollProject.Entities.Entities.GeoRuralDistricts", "RuralDistrict")
+                        .WithMany("Neighborhoods")
+                        .HasForeignKey("GeoRuralDistricts_ID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PayRollProject.Entities.Entities.ApplicationUsers", "Users")
+                        .WithMany()
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("County");
+
+                    b.Navigation("District");
+
+                    b.Navigation("Province");
+
+                    b.Navigation("RuralDistrict");
+
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("PayRollProject.Entities.Entities.GeoProvinces", b =>
+                {
+                    b.HasOne("PayRollProject.Entities.Entities.ApplicationUsers", "Users")
+                        .WithMany()
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("PayRollProject.Entities.Entities.GeoRuralDistricts", b =>
+                {
+                    b.HasOne("PayRollProject.Entities.Entities.GeoCounties", "County")
+                        .WithMany()
+                        .HasForeignKey("GeoCounty_ID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PayRollProject.Entities.Entities.GeoDistricts", "District")
+                        .WithMany("RuralDistricts")
+                        .HasForeignKey("GeoDistricts_ID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PayRollProject.Entities.Entities.GeoProvinces", "Province")
+                        .WithMany()
+                        .HasForeignKey("GeoProvince_ID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PayRollProject.Entities.Entities.ApplicationUsers", "Users")
+                        .WithMany()
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("County");
+
+                    b.Navigation("District");
+
+                    b.Navigation("Province");
+
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("PayRollProject.Entities.Entities.GeoCounties", b =>
+                {
+                    b.Navigation("Districts");
+                });
+
+            modelBuilder.Entity("PayRollProject.Entities.Entities.GeoDistricts", b =>
+                {
+                    b.Navigation("RuralDistricts");
+                });
+
+            modelBuilder.Entity("PayRollProject.Entities.Entities.GeoProvinces", b =>
+                {
+                    b.Navigation("Counties");
+                });
+
+            modelBuilder.Entity("PayRollProject.Entities.Entities.GeoRuralDistricts", b =>
+                {
+                    b.Navigation("Neighborhoods");
+                });
+
+            modelBuilder.Entity("PayRollProject.Entities.Entities.Provinces", b =>
+                {
+                    b.Navigation("Cities");
                 });
 #pragma warning restore 612, 618
         }

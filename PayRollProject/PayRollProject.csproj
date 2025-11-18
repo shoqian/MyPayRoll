@@ -29,6 +29,7 @@
     <Folder Include="Areas\AdminArea\Data\" />
     <Folder Include="Areas\AdminArea\Models\" />
     <Folder Include="wwwroot\assets\icon\" />
+    <Folder Include="wwwroot\Pages\userManager\css\" />
   </ItemGroup>
 
 </Project>

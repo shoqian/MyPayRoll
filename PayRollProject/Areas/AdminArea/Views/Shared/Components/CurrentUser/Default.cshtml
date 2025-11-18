@@ -1,0 +1,32 @@
+﻿
+@model PayRollProject.ViewModels.CurrentUserViewModel
+
+@if (Model == null)
+{
+	<div class="user-nav d-sm-flex d-none">
+		<span class="user-name">ورود نکرده</span>
+		<span class="user-status text-muted">غیره فعال</span>
+	</div>
+}
+else
+{
+	<div class="user-nav d-sm-flex d-none">
+		<span class="user-name">@Model.FullName</span>
+		<span class= 'user-status text-muted @(Model.IsActive ? "active" : "deactivate")'
+			  data-active="@((Model.IsActive).ToString().ToLower())"
+			  role="img"
+			  aria-label="@(Model.IsActive ? "فعال" : "غیره فعال")"></span>
+	</div>
+	<span>
+		<img class="round" src="~/assets/images/portrait/large/avatar-mahdi-shoqian.png" alt="avatar" height="40" width="40" />
+	</span>
+}
+
+<script>
+
+	window.currentUserId = '@(Model?.Id)' || null ;
+
+	console.log("Current User ID:", window.currentUserId);
+
+
+</script>

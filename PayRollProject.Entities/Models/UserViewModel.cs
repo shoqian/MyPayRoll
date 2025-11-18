@@ -11,7 +11,6 @@
         // [RegularExpression(@"^[a-zA-Z0-9_]+$", ErrorMessage = "نام کاربری فقط می‌تواند شامل حروف، اعداد و زیرخط باشد.")] 
         [Required(AllowEmptyStrings = false, ErrorMessage = "نام کاربری وارد نشده است.")]
         [RegularExpression(@"^[^\\/:*;\)\(]+$", ErrorMessage = "لطفا از کاراکتر های غیر مجاز استفاده نکنید.")]
-        [EmailAddress]
         public string UserName { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "کلمه عبور وارد نشده است.")]
@@ -50,6 +49,6 @@
         // 2 = غیرفعال
         public byte UserFlag { get; set; }
 
-        public string? UserFlagText { get; set; }
+        public string UserFlagText { get; set; }
     }
 }

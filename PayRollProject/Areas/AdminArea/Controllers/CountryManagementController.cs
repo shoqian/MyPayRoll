@@ -1,19 +1,24 @@
 ﻿namespace PayRollProject.Areas.AdminArea.Controllers
 {
-    using System.Collections;
-    using Entities.Entities;
-    using Syncfusion.EJ2.Base;
+	using System.Collections;
+	using Entities.Entities;
+	using Microsoft.AspNetCore.Authorization;
+	using Microsoft.AspNetCore.Identity;
+	using Syncfusion.EJ2.Base;
 
-    [Area("AdminArea")]
+	[Area("AdminArea")]
+    [Authorize]
     public class CountryManagementController : Controller
     {
         private readonly IUnitOfWork _context;
         private readonly IBaseTableRepository _repository;
+        private readonly UserManager<ApplicationUsers> _userManager;
 
-        public CountryManagementController(IUnitOfWork context, IBaseTableRepository repository)
+        public CountryManagementController(IUnitOfWork context, IBaseTableRepository repository, UserManager<ApplicationUsers> userManager)
         {
             this._context = context;
             this._repository = repository;
+            this._userManager = userManager;
         }
 
         // GET
@@ -66,7 +71,10 @@
                 var countries = this._context.CountriesUw.Get();
                 Countries country = new Countries
                 {
-                    CountryName = model.Value.CountryName, Description = model.Value.Description
+                    CountryName = model.Value.CountryName,
+                    Description = model.Value.Description,
+                    CreateDateTime = DateTime.Now,
+                    UserID = this._userManager.GetUserId(this.HttpContext.User) ?? "System"
                 };
                 if (countries.Any((Countries c) => c.CountryName == country.CountryName))
                 {

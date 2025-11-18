@@ -1,22 +1,35 @@
 ﻿namespace PayRollProject.DataModel.Services.Interface
 {
-    using PayRollProject.DataModel.Services.Repository;
-    using PayRollProject.Entities.Entities;
+	using Repository;
+	using PayRollProject.Entities.Entities;
 
-    public interface IUnitOfWork
-    {
-        
-        GenericCRUDClass<ApplicationUsers> UserManager { get; }
-        
-        GenericCRUDClass<ApplicationRoles> RoleManager { get; }
-        
-        GenericCRUDClass<Countries> CountriesUw { get; }
+	public interface IUnitOfWork
+	{
+		// کاربران
+		GenericCRUDClass<ApplicationUsers> UserManager { get; }
 
-        IEntityTransaction BeginTransaction();
+		// نقش‌ها
+		GenericCRUDClass<ApplicationRoles> RoleManager { get; }
 
-        void Save();
+		// جدول کشورها
+		GenericCRUDClass<Countries> CountriesUw { get; }
 
-       void SaveAsync();
+		// جداول جغرافیایی می‌توانند اینجا اضافه شوند
+		GenericCRUDClass<GeoProvinces> GeoProvincesUw { get; }
 
-    }
+		GenericCRUDClass<GeoCounties> GeoCountiesUw { get; }
+
+		GenericCRUDClass<GeoDistricts> GeoDistrictsUw { get; }
+
+		GenericCRUDClass<GeoRuralDistricts> GeoRuralDistrictsUw { get; }
+
+		GenericCRUDClass<GeoNeighborhoods> GeoNeighborhoodsUw { get; }
+
+
+		IEntityTransaction BeginTransaction();
+
+		void Save();
+
+		void SaveAsync();
+	}
 }

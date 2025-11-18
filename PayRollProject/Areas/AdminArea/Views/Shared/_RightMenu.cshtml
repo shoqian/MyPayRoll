@@ -25,7 +25,7 @@
             </li>
 
             <li class="is-shown">
-                <a href="/AdminArea/UserManager/Index">
+                <a asp-action="Index" asp-controller="UserManager" asp-area="AdminArea" class="nav-link">
                     <i class="menu-livicon" data-icon="users"></i>
                     <span>ليست کاربران سيستم</span>
                 </a>
@@ -39,9 +39,15 @@
                 <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
 
                     <li class="is-shown">
-                        <a href="/AdminArea/CountryManagement" style="font-size: 12px;">
+                        <a asp-action="Index" asp-controller="CountryManagement" asp-area="AdminArea" style="font-size: 12px;">
                             <i class="menu-livicon" data-icon="location"></i>
                             <span>ليست کشورها</span>
+                        </a>
+                    </li>
+                    <li class="is-shown">
+                        <a asp-action="Index" asp-controller="CityManagement" asp-area="AdminArea" style="font-size: 12px;">
+                            <i class="menu-livicon" data-icon="building"></i>
+                            <span>ليست شهرها</span>
                         </a>
                     </li>
 
