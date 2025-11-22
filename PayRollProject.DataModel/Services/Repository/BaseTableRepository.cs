@@ -30,7 +30,7 @@
 
 public void UpdateProvince(CRUDModel<Province_Tbl> model)
         {
-            var query = this.ProvincesUw.GetById(model.Value.ProvinceID);
+            var query = this.ProvincesUw.GetById(model.Value.ProcinceID);
             if (query != null)
             {
                 query.ProvinceName = model.Value.ProvinceName;
