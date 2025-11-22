@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PayRollProject.DataModel;
 
@@ -11,9 +12,11 @@ using PayRollProject.DataModel;
 namespace PayRollProject.DataModel.Migrations
 {
     [DbContext(typeof(PayRollDbContext))]
-    partial class PayRollDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251122161945_TblProvincAndTblCitiesForMyProject")]
+    partial class TblProvincAndTblCitiesForMyProject
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -27,5 +27,29 @@
                 this.Save();
             }
         }
+
+public void UpdateProvince(CRUDModel<Province_Tbl> model)
+        {
+            var query = this.ProvincesUw.GetById(model.Value.ProvinceID);
+            if (query != null)
+            {
+                query.ProvinceName = model.Value.ProvinceName;
+                query.Description = model.Value.Description;
+
+                this.ProvincesUw.Update(query);
+                this.Save();
+            }
+		}
+
+		public void DeleteProvince(CRUDModel<Province_Tbl> model)
+		{
+			var query = this.ProvincesUw.GetById(model.Value.ProcinceID);
+            if (query != null)
+            {
+	            query.IsDelete = true;
+	            this.ProvincesUw.Update(query);
+                this.Save();
+			}
+		}
     }
 }

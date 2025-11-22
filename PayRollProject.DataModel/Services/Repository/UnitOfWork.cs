@@ -11,7 +11,8 @@
 		private GenericCRUDClass<ApplicationUsers>? _userManager;
 		private GenericCRUDClass<ApplicationRoles>? _roleManager;
 		private GenericCRUDClass<Countries>? _countriesTbl;
-
+private GenericCRUDClass<Province_Tbl> ? _provinceTbl;
+private GenericCRUDClass<Cities_Tbl> ? _cityTbl;
 
 		// مدیریت جداول جغرافیایی
 		private GenericCRUDClass<GeoProvinces> _geoProvincesTbl;
@@ -59,8 +60,23 @@
 		// جدول کشورها
 		public GenericCRUDClass<Countries> CountriesUw =>
 			this._countriesTbl ??= new(this._context);
+		// جدول استان‌ها
+		public GenericCRUDClass<Province_Tbl> ProvincesUw
+		{
+			// فقط خواندنی
+			get
+			{
+				if (this._provinceTbl == null)
+				{
+					this._provinceTbl = new GenericCRUDClass<Province_Tbl>(this._context);
+				}
 
-
+				return this._provinceTbl;
+			}
+		}
+		// جدول شهرها
+		public GenericCRUDClass<Cities_Tbl> CitiesUw => this._cityTbl ??= new(this._context);
+		// جداول جغرافیایی می‌توانند اینجا اضافه شوند
 		public GenericCRUDClass<GeoProvinces> GeoProvincesUw =>
 			this._geoProvincesTbl ??= new(this._context);
 

@@ -36,13 +36,18 @@
                     <i class="menu-livicon livicon-evo-holder" data-icon="morph-doc">
                     </i><span class="menu-title">اطلاعات پايه</span>
                 </a>
-                <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
-
+                <ul class="navigation navigation-main" data-menu="menu-navigation" data-icon-style="lines">
                     <li class="is-shown">
                         <a asp-action="Index" asp-controller="CountryManagement" asp-area="AdminArea" style="font-size: 12px;">
                             <i class="menu-livicon" data-icon="location"></i>
                             <span>ليست کشورها</span>
                         </a>
+                    </li>
+                    <li class="is-shown">
+	                    <a asp-action="Index" asp-controller="ProvinceManagement" asp-area="AdminArea" style="font-size: 12px;">
+		                    <i class="menu-livicon" data-icon="building"></i>
+		                    <span>ليست استان ها</span>
+	                    </a>
                     </li>
 					<li class="is-shown">
 						<a asp-action="Index" asp-controller="CityManagement" asp-area="AdminArea" style="font-size: 12px;">
