@@ -29,68 +29,63 @@ namespace PayRollProject.Areas.AdminArea.Controllers
 			return View();
 		}
 
-		public IActionResult FetchProvinceList([FromBody] DataManagerRequest dm, string mode = "")
-		{
-			var allData = this._context.ProvincesUw.Get();
+                public IActionResult FetchProvinceList([FromBody] DataManagerRequest dm, string mode = "")
+                {
+                        var provinces = this._context.ProvincesUw.Get().ToArray();
+                        IEnumerable<ProvinceTbl> dataSource;
 
-			var provinces = allData as ProvinceTbl[] ?? allData.ToArray();
-			IEnumerable<ProvinceTbl> dataSource;
-			if (mode == "all")
-			{
-				dataSource = provinces;
-			}
-			else if (mode == "delete")
-			{
-				dataSource = provinces.Where(p => p.IsDelete);
-			}
-			else
-			{
-				dataSource = provinces.Where(p => !p.IsDelete);
-			}
+                        if (mode == "all")
+                        {
+                                dataSource = provinces;
+                        }
+                        else if (mode == "delete")
+                        {
+                                dataSource = provinces.Where(p => p.IsDelete);
+                        }
+                        else
+                        {
+                                dataSource = provinces.Where(p => !p.IsDelete);
+                        }
 
+                        var op = new DataOperations();
+                        if (dm.Search != null && dm.Search.Count > 0)
+                        {
+                                dataSource = op.PerformSearching(dataSource, dm.Search); // search
+                        }
 
-			var dt = dataSource.Cast<ProvinceTbl>();
-			var countAll = provinces.Length;
-			var countDel = provinces.Count(p => p.IsDelete);
-			var count = provinces.Count(p => !p.IsDelete);
+                        if (dm.Sorted != null && dm.Sorted.Count > 0)
+                        {
+                                dataSource = op.PerformSorting(dataSource, dm.Sorted); // sort
+                        }
 
-			var op = new DataOperations();
-			if (dm.Search != null && dm.Search.Count > 0)
-			{
-				dataSource = op.PerformSearching(dataSource, dm.Search); // search
-			}
+                        if (dm.Where != null && dm.Where.Count > 0)
+                        {
+                                dataSource = op.PerformFiltering(dataSource, dm.Where, dm.Where[0].Operator); // filter
+                        }
 
-			if (dm.Sorted != null && dm.Sorted.Count > 0)
-			{
-				dataSource = op.PerformSorting(dataSource, dm.Sorted); // sort
-			}
+                        var filteredCount = dataSource.Count();
 
-			if (dm.Where != null && dm.Where.Count > 0)
-			{
-				dataSource = op.PerformFiltering(dataSource, dm.Where, dm.Where[0].Operator); // filter
-			}
+                        if (dm.Skip != 0)
+                        {
+                                dataSource = op.PerformSkip(dataSource, dm.Skip); // paging: skip
+                        }
 
-			if (dm.Skip != 0)
-			{
-				dataSource = op.PerformSkip(dataSource, dm.Skip); // paging: skip
-			}
+                        if (dm.Take != 0)
+                        {
+                                dataSource = op.PerformTake(dataSource, dm.Take); // paging: take
+                        }
 
-			if (dm.Take != 0)
-			{
-				dataSource = op.PerformTake(dataSource, dm.Take); // paging: take
-			}
-
-			return dm.RequiresCounts
-				? Json(new
-				{
-					result = dataSource,
-					action = "fetchGridProvince",
-					countAll = countAll,
-					countDelete = countDel,
-					count = count
-				})
-				: Json(dataSource);
-		}
+                        return dm.RequiresCounts
+                                ? Json(new
+                                {
+                                        result = dataSource,
+                                        action = "fetchGridProvince",
+                                        countAll = provinces.Length,
+                                        countDelete = provinces.Count(p => p.IsDelete),
+                                        count = filteredCount
+                                })
+                                : Json(dataSource);
+                }
 
 		public IActionResult Insert([FromBody] CRUDModel<ProvinceTbl> model)
 		{

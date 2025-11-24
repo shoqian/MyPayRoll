@@ -17,9 +17,14 @@
 <link href="~/css/SyncfusionComponentStyle.css" rel="stylesheet" />
 @* issue: من قصد دارم در برنامه زمانیکه استانی حذف می‌شود و روی لینک a کلیک میشه همه استان‌های حذف شده را نمایش دهم.به نحوی که فقط استان های حذف شده نشان داده شود. *@
 <div style="display: flex; font-size: 13px;">
-	<p style="margin-left: 20px;">تعداد کل استان‌های نمایش داده شده: <span id="spnRowProvince"></span></p>
-	<p style="margin-left: 20px;color:orangered;">تعداد کل استان‌های<a> حذف</a> شده: <span id="spnRowDelProvince" style="color: red;"></span></p>
-	<p style="margin-left: 20px;color:darkgreen;">تعداد کل استان‌های ثبت شده: <span id="spnRowAllProvince" style="color:greenyellow;"></span></p>
+        <p style="margin-left: 20px;">تعداد کل استان‌های نمایش داده شده: <span id="spnRowProvince"></span></p>
+        <p style="margin-left: 20px;color:orangered;">تعداد کل استان‌های<a> حذف</a> شده: <span id="spnRowDelProvince" style="color: red;"></span></p>
+        <p style="margin-left: 20px;color:darkgreen;">تعداد کل استان‌های ثبت شده: <span id="spnRowAllProvince" style="color:greenyellow;"></span></p>
+</div>
+<div class="btn-group mb-3" role="group" aria-label="انتخاب نوع نمایش استان">
+        <button type="button" class="btn btn-outline-success btn-sm" onclick="updateProvinceList('')">استان‌های فعال</button>
+        <button type="button" class="btn btn-outline-danger btn-sm" onclick="updateProvinceList('delete')">استان‌های حذف شده</button>
+        <button type="button" class="btn btn-outline-primary btn-sm" onclick="updateProvinceList('all')">همه استان‌ها</button>
 </div>
 
 <div class="row bg-white">
@@ -63,7 +68,7 @@
 		window.deleteUrlProvince = '@Url.Action("Delete", "ProvinceManagement", new { area = "AdminArea" })';
 	</script>
 
-	<script src="~/Pages/ProvinceManegement/js/RowIndexScript.js" type="text/javascript"></script>
-	<script src="~/Pages/ProvinceManegement/js/CreateFuncScript.js" type="text/javascript"></script>
+        <script src="~/Pages/ProvinceManegement/js/RowIndexScript.js" type="text/javascript" asp-append-version="true"></script>
+        <script src="~/Pages/ProvinceManegement/js/CreateFuncScript.js" type="text/javascript" asp-append-version="true"></script>
 
 }
