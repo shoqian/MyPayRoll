@@ -5,10 +5,10 @@
 	using BaseClass;
 
 	[Table("Cities_Tbl")]
-	public class Cities_Tbl : FieldPublicInherits
+	public class CitiesTbl : FieldPublicInherits
 	{
 		[Key]
-		public int CityID { get; set; }
+		public int CityId { get; set; }
 
 		[Required(ErrorMessage = "وارد کردن نام شهر اجباری است.")]
 		[MaxLength(100,ErrorMessage = "تعداد حروف شهر نباید از 100 کاراکتر بیشتر باشد")]
@@ -22,6 +22,6 @@
 		[ForeignKey(nameof(Province))]
 		public int ProvinceID { get; set; }
 
-		public virtual Province_Tbl Province { get; set; }
+		public virtual ProvinceTbl Province { get; set; }
 	}
 }

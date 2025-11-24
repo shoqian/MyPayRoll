@@ -60,7 +60,12 @@
             }
 
             return dm.RequiresCounts
-                ? Json(new { result = dataSource, action = "fetchGrid", count = count })
+                ? Json(new
+                {
+	                result = dataSource,
+	                action = "fetchGrid",
+	                count = count
+                })
                 : Json(dataSource);
         }
 
@@ -89,7 +94,11 @@
             }
             catch (Exception e)
             {
-                return Json(new { action = "error", ErrMsg = e.Message });
+                return Json(new
+                {
+	                action = "error",
+	                ErrMsg = e.Message
+                });
             }
         }
 

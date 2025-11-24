@@ -6,5 +6,10 @@
     public interface IBaseTableRepository : IUnitOfWork
     {
         void UpdateCountry(CRUDModel<Countries> model);
-    }
+
+void UpdateProvince(CRUDModel<ProvinceTbl> model);
+
+void DeleteProvince(int provinceId);
+
+	}
 }

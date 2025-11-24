@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PayRollProject.DataModel;
 
@@ -11,9 +12,11 @@ using PayRollProject.DataModel;
 namespace PayRollProject.DataModel.Migrations
 {
     [DbContext(typeof(PayRollDbContext))]
-    partial class PayRollDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251122161945_TblProvincAndTblCitiesForMyProject")]
+    partial class TblProvincAndTblCitiesForMyProject
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -326,13 +329,13 @@ namespace PayRollProject.DataModel.Migrations
                     b.ToTable("Cities");
                 });
 
-            modelBuilder.Entity("PayRollProject.Entities.Entities.CitiesTbl", b =>
+            modelBuilder.Entity("PayRollProject.Entities.Entities.Cities_Tbl", b =>
                 {
-                    b.Property<int>("CityId")
+                    b.Property<int>("CityID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CityId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CityID"));
 
                     b.Property<string>("CityName")
                         .IsRequired()
@@ -357,7 +360,7 @@ namespace PayRollProject.DataModel.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("CityId");
+                    b.HasKey("CityID");
 
                     b.HasIndex("ProvinceID");
 
@@ -586,18 +589,19 @@ namespace PayRollProject.DataModel.Migrations
                     b.ToTable("GeoRuralDistricts");
                 });
 
-            modelBuilder.Entity("PayRollProject.Entities.Entities.ProvinceTbl", b =>
+            modelBuilder.Entity("PayRollProject.Entities.Entities.Province_Tbl", b =>
                 {
-                    b.Property<int>("ProvinceId")
+                    b.Property<int>("ProcinceID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProvinceId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProcinceID"));
 
                     b.Property<DateTime>("CreateDateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasMaxLength(300)
                         .HasColumnType("nvarchar(300)");
 
@@ -613,11 +617,11 @@ namespace PayRollProject.DataModel.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("ProvinceId");
+                    b.HasKey("ProcinceID");
 
                     b.HasIndex("UserID");
 
-                    b.ToTable("ProvinceTbl");
+                    b.ToTable("Province_Tbl");
                 });
 
             modelBuilder.Entity("PayRollProject.Entities.Entities.Provinces", b =>
@@ -708,9 +712,9 @@ namespace PayRollProject.DataModel.Migrations
                     b.Navigation("Users");
                 });
 
-            modelBuilder.Entity("PayRollProject.Entities.Entities.CitiesTbl", b =>
+            modelBuilder.Entity("PayRollProject.Entities.Entities.Cities_Tbl", b =>
                 {
-                    b.HasOne("PayRollProject.Entities.Entities.ProvinceTbl", "Province")
+                    b.HasOne("PayRollProject.Entities.Entities.Province_Tbl", "Province")
                         .WithMany("Cities")
                         .HasForeignKey("ProvinceID")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -873,7 +877,7 @@ namespace PayRollProject.DataModel.Migrations
                     b.Navigation("Users");
                 });
 
-            modelBuilder.Entity("PayRollProject.Entities.Entities.ProvinceTbl", b =>
+            modelBuilder.Entity("PayRollProject.Entities.Entities.Province_Tbl", b =>
                 {
                     b.HasOne("PayRollProject.Entities.Entities.ApplicationUsers", "Users")
                         .WithMany()
@@ -904,7 +908,7 @@ namespace PayRollProject.DataModel.Migrations
                     b.Navigation("Neighborhoods");
                 });
 
-            modelBuilder.Entity("PayRollProject.Entities.Entities.ProvinceTbl", b =>
+            modelBuilder.Entity("PayRollProject.Entities.Entities.Province_Tbl", b =>
                 {
                     b.Navigation("Cities");
                 });
