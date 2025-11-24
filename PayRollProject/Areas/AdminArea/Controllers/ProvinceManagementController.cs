@@ -14,7 +14,8 @@ namespace PayRollProject.Areas.AdminArea.Controllers
 		private readonly IBaseTableRepository _repository;
 		private readonly UserManager<ApplicationUsers> _userManager;
 
-		public ProvinceManagementController(IUnitOfWork context, IBaseTableRepository repository, UserManager<ApplicationUsers> userManager)
+		public ProvinceManagementController(IUnitOfWork context, IBaseTableRepository repository,
+			UserManager<ApplicationUsers> userManager)
 		{
 			this._context = context;
 			this._repository = repository;
@@ -28,18 +29,30 @@ namespace PayRollProject.Areas.AdminArea.Controllers
 			return View();
 		}
 
-		public IActionResult FetchProvinceList([FromBody] DataManagerRequest dm)
+		public IActionResult FetchProvinceList([FromBody] DataManagerRequest dm, string mode = "")
 		{
 			var allData = this._context.ProvincesUw.Get();
 
 			var provinces = allData as ProvinceTbl[] ?? allData.ToArray();
-			var dataSource = provinces
-.Where(p => !p.IsDelete);
-			
+			IEnumerable<ProvinceTbl> dataSource;
+			if (mode == "all")
+			{
+				dataSource = provinces;
+			}
+			else if (mode == "delete")
+			{
+				dataSource = provinces.Where(p => p.IsDelete);
+			}
+			else
+			{
+				dataSource = provinces.Where(p => !p.IsDelete);
+			}
+
+
 			var dt = dataSource.Cast<ProvinceTbl>();
 			var countAll = provinces.Length;
 			var countDel = provinces.Count(p => p.IsDelete);
-			var count = dt.Count();
+			var count = provinces.Count(p => !p.IsDelete);
 
 			var op = new DataOperations();
 			if (dm.Search != null && dm.Search.Count > 0)
@@ -68,9 +81,10 @@ namespace PayRollProject.Areas.AdminArea.Controllers
 			}
 
 			return dm.RequiresCounts
-				? Json(new 
+				? Json(new
 				{
-					result = dataSource, action = "fetchGridProvince",
+					result = dataSource,
+					action = "fetchGridProvince",
 					countAll = countAll,
 					countDelete = countDel,
 					count = count
@@ -137,19 +151,11 @@ namespace PayRollProject.Areas.AdminArea.Controllers
 				var key = model.Key.ToString();
 				var province = this._context.ProvincesUw.GetById(int.Parse(key));
 				_repository.DeleteProvince(int.Parse(key));
-				return Json(new
-				{
-					action = "delete",
-					province = province.ProvinceName
-				});
+				return Json(new { action = "delete", province = province.ProvinceName });
 			}
 			catch (Exception e)
 			{
-				return Json(new
-				{
-					action = "error",
-					ErrMsg = e.Message
-				});
+				return Json(new { action = "error", ErrMsg = e.Message });
 			}
 		}
 	}
