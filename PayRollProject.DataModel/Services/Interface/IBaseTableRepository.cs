@@ -7,9 +7,9 @@
     {
         void UpdateCountry(CRUDModel<Countries> model);
 
-void UpdateProvince(CRUDModel<Province_Tbl> model);
+void UpdateProvince(CRUDModel<ProvinceTbl> model);
 
-void DeleteProvince(CRUDModel<Province_Tbl> model);
+void DeleteProvince(int provinceId);
 
 	}
 }

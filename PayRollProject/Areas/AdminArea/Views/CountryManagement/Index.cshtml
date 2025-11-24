@@ -31,7 +31,7 @@
             <e-grid-editsettings allowAdding AllowDeleting AllowEditing showDeleteConfirmDialog=true></e-grid-editsettings>
 
             <e-grid-columns>
-                <e-grid-column field="rowIndex" allowediting="false" allowFiltering="false" allowSorting="false" headerText="ردیف" width="80"></e-grid-column>
+                <e-grid-column field="rowIndex" allowEditing="false" allowFiltering="false" allowSorting="false" headerText="ردیف" width="80"></e-grid-column>
                 <e-grid-column headerTemplate="#countryHeader" field="CountryName" TextAlign="Right"></e-grid-column>
                 <e-grid-column headerTemplate="#descriptionHeader" field="Description" TextAlign="Right"></e-grid-column>
                 <e-grid-column field="CountryID" visible="false" isPrimaryKey="true" allowEditing="false"></e-grid-column>
@@ -54,10 +54,10 @@
     </script>
 
 	<script>
-		window.baseUrl = '@Url.Action("FetchCountryList","CountryManagement",new {area = "AdminArea" })';
-		window.insertUrl = '@Url.Action("Insert", "CountryManagement", new {area = "AdminArea" })';
-		window.updateUrl = '@Url.Action("Update", "CountryManagement", new {area = "AdminArea" })';
-		window.deleteUrl = '@Url.Action("Delete", "CountryManagement", new {area = "AdminArea" })'
+		let baseUrl = '@Url.Action("FetchCountryList","CountryManagement",new {area = "AdminArea" })';
+		let insertUrl = '@Url.Action("Insert", "CountryManagement", new {area = "AdminArea" })';
+		let updateUrl = '@Url.Action("Update", "CountryManagement", new {area = "AdminArea" })';
+		let deleteUrl = '@Url.Action("Delete", "CountryManagement", new {area = "AdminArea" })'
 	</script>
 
 

@@ -15,10 +15,10 @@
 		GenericCRUDClass<Countries> CountriesUw { get; }
 
 		// جدول استان‌ها
-		GenericCRUDClass<Province_Tbl> ProvincesUw { get; }
+		GenericCRUDClass<ProvinceTbl> ProvincesUw { get; }
 
 		// جدول شهرها
-		GenericCRUDClass<Cities_Tbl> CitiesUw { get; }
+		GenericCRUDClass<CitiesTbl> CitiesUw { get; }
 
 		// جداول جغرافیایی می‌توانند اینجا اضافه شوند
 		GenericCRUDClass<GeoProvinces> GeoProvincesUw { get; }

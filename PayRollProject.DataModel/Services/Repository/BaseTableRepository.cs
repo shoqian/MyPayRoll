@@ -28,9 +28,9 @@
             }
         }
 
-public void UpdateProvince(CRUDModel<Province_Tbl> model)
+public void UpdateProvince(CRUDModel<ProvinceTbl> model)
         {
-            var query = this.ProvincesUw.GetById(model.Value.ProcinceID);
+            var query = this.ProvincesUw.GetById(model.Value.ProvinceId);
             if (query != null)
             {
                 query.ProvinceName = model.Value.ProvinceName;
@@ -41,9 +41,9 @@ public void UpdateProvince(CRUDModel<Province_Tbl> model)
             }
 		}
 
-		public void DeleteProvince(CRUDModel<Province_Tbl> model)
+		public void DeleteProvince(int provinceId)
 		{
-			var query = this.ProvincesUw.GetById(model.Value.ProcinceID);
+			var query = this.ProvincesUw.GetById(provinceId);
             if (query != null)
             {
 	            query.IsDelete = true;

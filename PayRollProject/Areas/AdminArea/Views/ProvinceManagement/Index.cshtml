@@ -2,62 +2,48 @@
 	ViewData["AdminTitle"] = "لیست استان ها";
 
 	List<object> toolBarItem = new List<object>
-{
-		new
-		{
-			type = "button",
-			id = "btnAddProvince",
-			text = "افزودن استان جدید",
-			icon = "fa fa-plus",
-			className = "btn btn-sm btn-primary"
-		},
-		new
-		{
-			type = "button",
-			id = "btnRefreshProvince",
-			text = "بارگذاری مجدد",
-			icon = "fa fa-sync",
-			className = "btn btn-sm btn-secondary"
-
-		},
-		new
-		{
-			type = "button",
-			id = "btnExportProvince",
-			text = "خروجی اکسل",
-			icon = "fa fa-file-excel",
-			className = "btn btn-sm btn-success"
-		}
+	{
+		"Add",
+		"Edit",
+		"Delete",
+		"Update",
+		"Cancel",
+		"ExcelExport",
+		"Search"
 	};
+
 }
 
 <link href="~/css/SyncfusionComponentStyle.css" rel="stylesheet" />
 
-<div style="display: flex;font-size:13px;">
-	<p style="margin-left:20px;">تعداد کل استانها: <span id="spnRowProvince"></span></p>
+<div style="display: flex; font-size: 13px;">
+	<p style="margin-left: 20px;" >تعداد کل استان‌های نمایش داده شده: <span id="spnRowProvince"></span></p>
+	<p style="margin-left: 20px;color:orangered;" >تعداد کل استان‌های<a  > حذف</a> شده: <span id="spnRowDelProvince" style="color: red;"></span></p>
+	<p style="margin-left: 20px;color:darkgreen;" >تعداد کل استان‌های ثبت شده: <span id="spnRowAllProvince" style="color:greenyellow;"></span></p>
 </div>
 
 <div class="row bg-white">
 	<div class="col-md-12">
-		<ejs-grid id="provinceList" created="createFunc" toolbar="@toolBarItem" rowDataBound="indexNumber"
-				  allowExcelExport allowFiltering allowPaging allowSorting
-				  >
+		
+		<ejs-grid id="provinceList" created="createdFunc" toolbar="@toolBarItem" rowDataBound="rowDataBoundFunc" gridLines="Both"
+		          allowExcelExport allowFiltering allowPaging allowSorting>
 			<e-grid-pagesettings pageSize="10" pageCount="3"></e-grid-pagesettings>
 			<e-grid-filtersettings mode="Immediate" type="Menu"></e-grid-filtersettings>
 			<e-grid-editsettings allowAdding allowEditing allowDeleting showDeleteConfirmDialog mode="Normal"></e-grid-editsettings>
 
 			<e-grid-columns>
-				<e-grid-column field="rowIndex" headerText="ردیف" width="80" allowEditing="false" allowSorting="false" textAlign="Right"></e-grid-column>
-				<e-grid-column field="ProvinceName" headerTemplate="#provinceHeaser" textAlign="Right"></e-grid-column>
+				<e-grid-column field="rowIndex" headerText="ردیف" width="90" allowEditing="false" allowSorting="false" allowFiltering="false" textAlign="Right"></e-grid-column>
+				<e-grid-column field="ProvinceName" headerTemplate="#provinceHeader" textAlign="Right"></e-grid-column>
 				<e-grid-column field="Description" headerTemplate="#descriptionHeader" textAlign="Right"></e-grid-column>
-				<e-grid-column field="ProvinceID" visible="false" isPrimaryKey allowEditing="false"></e-grid-column>
+				<e-grid-column field="ProvinceId" visible="false" isPrimaryKey="true" allowEditing="false"></e-grid-column>
 			</e-grid-columns>
 		</ejs-grid>
+
 	</div>
 </div>
 
 
-@section AdminScripts{
+@section AdminScripts {
 
 
 	<!-- برای نمایش ستون نام استان Header Template -->
@@ -71,13 +57,13 @@
 	</script>
 
 	<script>
-		window.baseUrlProvince = '@Url.Action("FetchProvinceList","ProvinceManagement", new { area = "AdminArea"} )';
-		window.insertUrlProvince = '@Url.Action("Insert","ProvinceManagement", new { area = "AdminArea"} )';
-		window.updateUrlProvince = '@Url.Action("Update","ProvinceManagement", new { area = "AdminArea"} )';
-		window.deleteUrlProvince = '@Url.Action("Delete","ProvinceManagement", new { area = "AdminArea"} )';
+		window.baseUrlProvince = '@Url.Action("FetchProvinceList", "ProvinceManagement", new { area = "AdminArea" })';
+		window.insertUrlProvince = '@Url.Action("Insert", "ProvinceManagement", new { area = "AdminArea" })';
+		window.updateUrlProvince = '@Url.Action("Update", "ProvinceManagement", new { area = "AdminArea" })';
+		window.deleteUrlProvince = '@Url.Action("Delete", "ProvinceManagement", new { area = "AdminArea" })';
 	</script>
 
-	<script src="~/Pages/ProvinceManegement/js/RowIndexScript.js"></script>
-	<script src="~/Pages/ProvinceManegement/js/CrateFuncScript.js"></script>
+	<script src="~/Pages/ProvinceManegement/js/RowIndexScript.js" type="text/javascript"></script>
+	<script src="~/Pages/ProvinceManegement/js/CreateFuncScript.js" type="text/javascript"></script>
 
 }

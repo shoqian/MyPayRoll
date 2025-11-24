@@ -11,8 +11,8 @@
 		private GenericCRUDClass<ApplicationUsers>? _userManager;
 		private GenericCRUDClass<ApplicationRoles>? _roleManager;
 		private GenericCRUDClass<Countries>? _countriesTbl;
-private GenericCRUDClass<Province_Tbl> ? _provinceTbl;
-private GenericCRUDClass<Cities_Tbl> ? _cityTbl;
+private GenericCRUDClass<ProvinceTbl> ? _provinceTbl;
+private GenericCRUDClass<CitiesTbl> ? _cityTbl;
 
 		// مدیریت جداول جغرافیایی
 		private GenericCRUDClass<GeoProvinces> _geoProvincesTbl;
@@ -61,21 +61,21 @@ private GenericCRUDClass<Cities_Tbl> ? _cityTbl;
 		public GenericCRUDClass<Countries> CountriesUw =>
 			this._countriesTbl ??= new(this._context);
 		// جدول استان‌ها
-		public GenericCRUDClass<Province_Tbl> ProvincesUw
+		public GenericCRUDClass<ProvinceTbl> ProvincesUw
 		{
 			// فقط خواندنی
 			get
 			{
 				if (this._provinceTbl == null)
 				{
-					this._provinceTbl = new GenericCRUDClass<Province_Tbl>(this._context);
+					this._provinceTbl = new GenericCRUDClass<ProvinceTbl>(this._context);
 				}
 
 				return this._provinceTbl;
 			}
 		}
 		// جدول شهرها
-		public GenericCRUDClass<Cities_Tbl> CitiesUw => this._cityTbl ??= new(this._context);
+		public GenericCRUDClass<CitiesTbl> CitiesUw => this._cityTbl ??= new(this._context);
 		// جداول جغرافیایی می‌توانند اینجا اضافه شوند
 		public GenericCRUDClass<GeoProvinces> GeoProvincesUw =>
 			this._geoProvincesTbl ??= new(this._context);

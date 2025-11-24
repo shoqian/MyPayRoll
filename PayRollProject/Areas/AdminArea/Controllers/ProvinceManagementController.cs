@@ -12,8 +12,15 @@ namespace PayRollProject.Areas.AdminArea.Controllers
 	{
 		private readonly IUnitOfWork _context;
 		private readonly IBaseTableRepository _repository;
-
 		private readonly UserManager<ApplicationUsers> _userManager;
+
+		public ProvinceManagementController(IUnitOfWork context, IBaseTableRepository repository, UserManager<ApplicationUsers> userManager)
+		{
+			this._context = context;
+			this._repository = repository;
+			this._userManager = userManager;
+		}
+
 
 		// GET
 		public IActionResult Index()
@@ -23,48 +30,60 @@ namespace PayRollProject.Areas.AdminArea.Controllers
 
 		public IActionResult FetchProvinceList([FromBody] DataManagerRequest dm)
 		{
-			var dataSource = this._context.ProvincesUw.Get()
-				.Where(p => p.IsDelete == false);
-			var dt = dataSource.Cast<Province_Tbl>();
+			var allData = this._context.ProvincesUw.Get();
+
+			var provinces = allData as ProvinceTbl[] ?? allData.ToArray();
+			var dataSource = provinces
+.Where(p => !p.IsDelete);
+			
+			var dt = dataSource.Cast<ProvinceTbl>();
+			var countAll = provinces.Length;
+			var countDel = provinces.Count(p => p.IsDelete);
 			var count = dt.Count();
 
 			var op = new DataOperations();
 			if (dm.Search != null && dm.Search.Count > 0)
 			{
-				dataSource = op.PerformSearching(dataSource, dm.Search); // جستجو
+				dataSource = op.PerformSearching(dataSource, dm.Search); // search
 			}
 
 			if (dm.Sorted != null && dm.Sorted.Count > 0)
 			{
-				dataSource = op.PerformSorting(dataSource, dm.Sorted); // مرتب کردن
+				dataSource = op.PerformSorting(dataSource, dm.Sorted); // sort
 			}
 
 			if (dm.Where != null && dm.Where.Count > 0)
 			{
-				dataSource = op.PerformFiltering(dataSource, dm.Where, dm.Where[0].Operator);
+				dataSource = op.PerformFiltering(dataSource, dm.Where, dm.Where[0].Operator); // filter
 			}
 
 			if (dm.Skip != 0)
 			{
-				dataSource = op.PerformSkip(dataSource, dm.Skip);
+				dataSource = op.PerformSkip(dataSource, dm.Skip); // paging: skip
 			}
 
 			if (dm.Take != 0)
 			{
-				dataSource = op.PerformTake(dataSource, dm.Take);
+				dataSource = op.PerformTake(dataSource, dm.Take); // paging: take
 			}
 
 			return dm.RequiresCounts
-				? Json(new { result = dataSource, action = "fetchGridProvince", count = count })
+				? Json(new 
+				{
+					result = dataSource, action = "fetchGridProvince",
+					countAll = countAll,
+					countDelete = countDel,
+					count = count
+				})
 				: Json(dataSource);
 		}
 
-		public IActionResult Insert([FromBody] CRUDModel<Province_Tbl> model)
+		public IActionResult Insert([FromBody] CRUDModel<ProvinceTbl> model)
 		{
 			try
 			{
 				var provinces = this._context.ProvincesUw.Get();
-				Province_Tbl province = new Province_Tbl
+				ProvinceTbl province = new ProvinceTbl
 				{
 					ProvinceName = model.Value.ProvinceName,
 					Description = model.Value.Description,
@@ -89,7 +108,7 @@ namespace PayRollProject.Areas.AdminArea.Controllers
 			}
 		}
 
-		public IActionResult Update([FromBody] CRUDModel<Province_Tbl> model)
+		public IActionResult Update([FromBody] CRUDModel<ProvinceTbl> model)
 		{
 			try
 			{
@@ -111,15 +130,17 @@ namespace PayRollProject.Areas.AdminArea.Controllers
 			}
 		}
 
-		public IActionResult Delete([FromBody] CRUDModel<Province_Tbl> model)
+		public IActionResult Delete([FromBody] CRUDModel<ProvinceTbl> model)
 		{
 			try
 			{
-				_repository.DeleteProvince(model);
+				var key = model.Key.ToString();
+				var province = this._context.ProvincesUw.GetById(int.Parse(key));
+				_repository.DeleteProvince(int.Parse(key));
 				return Json(new
 				{
 					action = "delete",
-					province = model.Value.ProvinceName
+					province = province.ProvinceName
 				});
 			}
 			catch (Exception e)

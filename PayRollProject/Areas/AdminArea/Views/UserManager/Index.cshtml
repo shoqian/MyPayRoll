@@ -101,22 +101,22 @@
 	@* 		${((+data.index) + 1)} *@
 	@* 	</div> *@
 	@* </script> *@
-<script>
-	let baseUrl = '@Url.Action("FetchUserList", "UserManager", new {area = "AdminArea"})';
-	let insertUrl = '@Url.Action("Insert", "UserManager", new {area = "AdminArea"})';
-	let updateUrl = '@Url.Action("Update", "UserManager", new {area = "AdminArea"})';
-	let activeUrl = '@Url.Action("ActiveUser", "UserManager", new { area = "AdminArea" })';
-	let deactivateUrl = '@Url.Action("DeactivateUser", "UserManager", new { area = "AdminArea" })';
+	<script>
+		let baseUrl = '@Url.Action("FetchUserList", "UserManager", new {area = "AdminArea"})';
+		let insertUrl = '@Url.Action("Insert", "UserManager", new {area = "AdminArea"})';
+		let updateUrl = '@Url.Action("Update", "UserManager", new {area = "AdminArea"})';
+		let activeUrl = '@Url.Action("ActiveUser", "UserManager", new { area = "AdminArea" })';
+		let deactivateUrl = '@Url.Action("DeactivateUser", "UserManager", new { area = "AdminArea" })';
 
 	
 
-//	let currentUser =
-	@* @Html.Raw(System.Text.Json.JsonSerializer.Serialize(ViewData["CurrentUserVm"]));*@
-//	console.log("currentUser (Server-injected) :", currentUser);
+	//	let currentUser =
+		@* @Html.Raw(System.Text.Json.JsonSerializer.Serialize(ViewData["CurrentUserVm"]));*@
+	//	console.log("currentUser (Server-injected) :", currentUser);
 
-</script>
+	</script>
 
-<script src="~/Pages/userManager/js/Script.js" type="text/javascript"></script>
+	<script src="~/Pages/userManager/js/Script.js" type="text/javascript"></script>
 	<!-- Row Data Bound Event -->
 	<script src="~/Pages/userManager/js/rowDataBoundScript.js" type="text/javascript"></script>
 	<!--generate dropdown for gender-->
