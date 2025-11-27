@@ -3,15 +3,6 @@ function cellInfoFunc(args) {
 
 	var isCurrentUser = window.currentUserId && args.data.id === window.currentUserId;
 
-//	if (isCurrentUser) {
-//		$(args.row).classList.add("currentUser");
-//		$(args.row).classList.add("e-disabled");
-//
-//		$(args.row).attr("title", "کاربر جاری سیستم - امکان ویرایش خودش را ندارد");
-//
-////		$(args.row).prop("title", "کاربر جاری سیستم - امکان ویرایش خودش را ندارد");
-//	}
-
 	if (args.column["headerText"] === "عملیات") {
 		if (isCurrentUser) {
 

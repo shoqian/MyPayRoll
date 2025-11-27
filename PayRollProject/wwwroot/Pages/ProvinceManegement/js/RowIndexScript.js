@@ -1,4 +1,4 @@
-﻿function indexNumber (args) {
+﻿function indexNumber(args) {
 	let grid = document.getElementById('provinceList').ej2_instances[0];
 
 	if (args.row) {
@@ -11,7 +11,12 @@
 }
 
 
-function rowDataBoundFunc (e) {
+function rowDataBoundFunc(e) {
 	indexNumber(e);
-}
 
+	if (e && e.data.isDelete === true) {
+		e.row.classList.add('deactivate');
+	} else {
+		e.row.classList.remove('deactivate');
+	}
+}

@@ -11,5 +11,7 @@ void UpdateProvince(CRUDModel<ProvinceTbl> model);
 
 void DeleteProvince(int provinceId);
 
+void RestoreProvince(int provinceId);
+
 	}
 }

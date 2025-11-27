@@ -139,6 +139,7 @@ namespace PayRollProject.Areas.AdminArea.Controllers
 			}
 		}
 
+		[HttpPost]
 		public IActionResult Delete([FromBody] CRUDModel<ProvinceTbl> model)
 		{
 			try
@@ -147,6 +148,22 @@ namespace PayRollProject.Areas.AdminArea.Controllers
 				var province = this._context.ProvincesUw.GetById(int.Parse(key));
 				_repository.DeleteProvince(int.Parse(key));
 				return Json(new { action = "delete", province = province.ProvinceName });
+			}
+			catch (Exception e)
+			{
+				return Json(new { action = "error", ErrMsg = e.Message });
+			}
+		}
+
+		[HttpPost]
+		public IActionResult Restore([FromBody] CRUDModel<ProvinceTbl> model)
+		{
+			try
+			{
+				var key = model.Key.ToString();
+				var province = this._context.ProvincesUw.GetById(int.Parse(key));
+				_repository.RestoreProvince(int.Parse(key));
+				return Json(new { action = "restore", province = province.ProvinceName });
 			}
 			catch (Exception e)
 			{

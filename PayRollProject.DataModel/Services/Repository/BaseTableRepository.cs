@@ -51,5 +51,16 @@ public void UpdateProvince(CRUDModel<ProvinceTbl> model)
                 this.Save();
 			}
 		}
+
+		public void RestoreProvince(int provinceId)
+		{
+			var query = this.ProvincesUw.GetById(provinceId);
+			if (query!=null)
+			{
+				query.IsDelete = false;
+                this.ProvincesUw.Update(query);
+                this.Save();
+			}
+		}
     }
 }

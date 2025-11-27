@@ -4,12 +4,7 @@
 
 class ProvinceCustomAdaptor extends ej.data.UrlAdaptor {
         processResponse (data, dt, query, xhr, request, changes) {
-//              console.log("Data is :", data);
-//              console.log("Data Table :", dt);
-//              console.log("Query is :", query);
-//              console.log("XHR is :", xhr);
-//              console.log("Request is :", request);
-//              console.log("Changes are :", changes);
+
                 if (!ej.base.isNullOrUndefined(data.action)) {
                         const grid = getProvinceGrid();
                         if (data.action === "fetchGridProvince") {
