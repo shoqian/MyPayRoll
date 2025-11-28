@@ -1,8 +1,8 @@
 ﻿let DialogObj;
 
-function commandsClickFunc (args) {
+let commandsClickFunc =(args) => {
 	if (args.commandColumn.type === 'deleteCmd') {
-		DialigObj = ej.popups.DialogUtility.confirm({
+		DialogObj = ej.popups.DialogUtility.confirm({
 			title: `<span class="e-badge e-badge-danger e-badge-pill" > غیرفعال کردن استان </span>`,
 			content: `آیا از غیرفعال کردن استان <span style="color:red;font-weight:bold;" >${args.rowData.province
 				}</span> مطمئن هستید ؟`,
@@ -55,7 +55,7 @@ function commandsClickFunc (args) {
 		});
 		ajax.send();
 		ajax.onSuccess = function(data) {
-			DialogObj.hidden();
+			DialogObj.hide();
 			let grid = getProvinceGrid();
 			grid.refresh();
 		}
@@ -70,9 +70,14 @@ function commandsClickFunc (args) {
 		});
 		ajax.send();
 		ajax.onSuccess = (data) => {
-			DialogObj.hidden();
+			DialogObj.hide();
 			let grid = getProvinceGrid();
 			grid.refresh();
 		}
 	}
+
+	function cancelClick(eArgs) {
+		DialogObj.hide();
+	}
+
 }

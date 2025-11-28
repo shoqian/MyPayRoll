@@ -1,5 +1,9 @@
 ﻿//	Command Click Function
 // okButton: { text: "خوبه", cssClass: "badge bg-success okConfirm" },
+
+let DialogObj;
+
+
 function commandClickFunc (args) {
 //	console.log(`این مقادر داخلی Command Click Function هستش ${JSON.stringify(args)} ....`);
 
