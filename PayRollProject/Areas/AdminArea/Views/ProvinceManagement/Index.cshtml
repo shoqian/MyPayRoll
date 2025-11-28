@@ -1,15 +1,18 @@
 ﻿@{
 	ViewData["AdminTitle"] = "لیست استان ها";
 
+
 	List<object> toolBarItem = new List<object>
-{
-		"Add",
-		"Edit",
-		"Delete",
-		"Update",
-		"Cancel",
-		"ExcelExport",
-		"Search"
+	{
+
+		new { type = "Add", title = "ایجاد استان جدید", buttonOption = new { iconCss = "e-icons e-plus", cssClass = "badge bg-outline-success btnAdd" } },
+		new { type = "Edit", title = "ویرایش استان", buttonOption = new { iconCss = "e-icons e-edit", cssClass = "badge bg-outline-warning btnEdit" } },
+		new { type = "Update", title = "ثبت ذخیره", buttonOption = new { iconCss = "e-icons e-save", cssClass = "badge bg-outline-secondary btnSave" } },
+		new { type = "Cancel", title = "لغو عملیات", buttonOption = new { iconCss = "e-icons e-circle-remove", cssClass = "badge bg-outline-dark btnCancel" } },
+		new { type = "ExcelExport", title = "خروجی اکسل", buttonOption = new { iconCss = "e-icons e-export-excel", cssClass = "badge bg-outline-primary btnExcel" } },
+		new { type = "Search", title = "جستجو در استان ها", buttonOption = new { iconCss = "e-icons e-search", cssClass = "badge bg-outline-info btnSearch" } },
+		new { type = "ProvinceDelete", title = "حذف استان", buttonOption = new { iconCss = "e-icons e-delete-3", cssClass = "badge bg-danger btnDelete" } },
+		new { type = "ProvinceRestore", title = "بازگردانی استان", buttonOption = new { iconCss = "e-icons e-redo", cssClass = "badge bg-info btnRestore" } }
 	};
 
 }
