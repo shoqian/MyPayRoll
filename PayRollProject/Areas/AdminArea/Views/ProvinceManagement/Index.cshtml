@@ -1,18 +1,37 @@
 ﻿@{
 	ViewData["AdminTitle"] = "لیست استان ها";
 
-	List<object> toolBarItem = new List<object>
+	List<object> toolBarItem = new List<object> { "Add", "Edit", "Update", "Cancel", "Search" };
+
+	toolBarItem.Add(new
 	{
-// #4 fix 
-		new { type = "Add", title = "ایجاد استان جدید", buttonOption = new { iconCss = "e-icons e-plus", cssClass = "badge bg-outline-success btnAdd" } },
-		new { type = "Edit", title = "ویرایش استان", buttonOption = new { iconCss = "e-icons e-edit", cssClass = "badge bg-outline-warning btnEdit" } },
-		new { type = "Update", title = "ثبت ذخیره", buttonOption = new { iconCss = "e-icons e-save", cssClass = "badge bg-outline-secondary btnSave" } },
-		new { type = "Cancel", title = "لغو عملیات", buttonOption = new { iconCss = "e-icons e-circle-remove", cssClass = "badge bg-outline-dark btnCancel" } },
-		new { type = "ExcelExport", title = "خروجی اکسل", buttonOption = new { iconCss = "e-icons e-export-excel", cssClass = "badge bg-outline-primary btnExcel" } },
-		new { type = "Search", title = "جستجو در استان ها", buttonOption = new { iconCss = "e-icons e-search", cssClass = "badge bg-outline-info btnSearch" } },
-		new { type = "ProvinceDelete", title = "حذف استان", buttonOption = new { iconCss = "e-icons e-delete-3", cssClass = "badge bg-danger btnDelete" } },
-		new { type = "ProvinceRestore", title = "بازگردانی استان", buttonOption = new { iconCss = "e-icons e-redo", cssClass = "badge bg-info btnRestore" } }
-	};
+		text = "ProvinceDelete",
+		tooltipText = "برای حذف استان استفاده میشود",
+		id = "provinceDeleteBtn",
+		prefixIcon = "e-icons e-delete-3",
+		type = "ProvinceDelete",
+		title = "حذف استان",
+		buttonOption = new
+		{
+			iconCss = "e-icons e-delete-3",
+			cssClass = "btn btn-danger btnDelete"
+		}
+	});
+	toolBarItem.Add(new
+	{
+		text = "ProvinceRestore",
+		tooltipText = "برای بازگرداندن استان استفاده میشود",
+		id = "provinceRestoreBtn",
+		prefixIcon = "e-icons e-redo",
+		type = "ProvinceRestore",
+		title = "بازگردانی استان",
+		buttonOption = new
+		{
+			iconCss = "e-icons e-redo",
+			cssClass = "badge bg-info btnRestore"
+		}
+	});
+
 	List<object>
 		commands = new List<object> { new { type = "deleteCmd", title = "حذف استان", buttonOption = new { iconCss = "e-icons e-delete", cssClass = "badge bg-danger btnDelete" } }, new { type = "restoreCmd", title = "بازگردانی استان", buttonOption = new { iconCss = "e-icons e-redo", cssClass = "badge bg-info btnRestore" } }, };
 }
@@ -35,9 +54,9 @@
 	<div class="col-md-12">
 
 		<ejs-grid id="provinceList" created="createdFunc" toolbar="toolBarItem" rowDataBound="rowDataBoundFunc" gridLines="Both"
-		          allowExcelExport allowFiltering allowPaging allowSorting
-		          toolbarClick="toolbarClickFunc"
-		          queryCellInfo="QueryCellFunc" commandClick="commandsClickFunc">
+				  allowExcelExport allowFiltering allowPaging allowSorting
+				  toolbarClick="toolbarClickFunc"
+				  queryCellInfo="QueryCellFunc" commandClick="commandsClickFunc">
 			<e-grid-pagesettings pageSize="10" pageCount="3"></e-grid-pagesettings>
 			<e-grid-filtersettings mode="Immediate" type="Menu"></e-grid-filtersettings>
 			<e-grid-editsettings allowAdding allowEditing allowDeleting showDeleteConfirmDialog mode="Normal"></e-grid-editsettings>
