@@ -15,7 +15,7 @@
 		updateToolbarDeleteRestor(null);
 
 		return;
-	} else {
+	}
 
 		// console.log("Selected record :",selectedRecords);
 
@@ -33,9 +33,4 @@
 				break;
 
 		}
-	}
-	
-
-
-	
 }

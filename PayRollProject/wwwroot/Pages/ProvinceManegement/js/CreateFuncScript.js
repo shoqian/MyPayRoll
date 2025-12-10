@@ -237,28 +237,20 @@ function updateToolbarDeleteRestor(rowData) {
 	// پیش فرض غیر فعال کردن هر دو دکمه
 	grid.toolbarModule.enableItems(ids, false);
 
-	let select = grid.getSelectedRecords();
+	if (!rowData) return;
 
-
-	if (!rowData) {
-		return;
-	} else {
-
-		let isDelete = rowData.IsDelete;
-		if (typeof isDelete === 'undefined') {
-			isDelete = rowData.isDelete;
-		}
-
-		console.log(select, isDelete);
-
-		if (select) {
-			if (isDelete) {
-				grid.toolbarModule.enableItems(['provinceList_restore'], true);
-			} else {
-				grid.toolbarModule.enableItems(['provinceList_deleteSoft'], true);
-			}
-		}
-
-
+	let isDelete = rowData.IsDelete;
+	if (typeof isDelete === 'undefined') {
+		isDelete = rowData.isDelete;
 	}
+
+	//console.log(select, isDelete);
+
+
+	if (isDelete) {
+		grid.toolbarModule.enableItems(['provinceList_restore'], true);
+	} else {
+		grid.toolbarModule.enableItems(['provinceList_deleteSoft'], true);
+	}
+
 }
