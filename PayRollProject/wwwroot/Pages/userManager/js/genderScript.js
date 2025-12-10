@@ -1,5 +1,5 @@
 ﻿
-// generate dropdown for gender
+// generate dropdown for gender #TODO معرفی جنسیت در جدول کاربران  
 
 let genderType;
 let genderTypeObj;

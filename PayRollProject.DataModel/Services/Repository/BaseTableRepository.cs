@@ -35,6 +35,7 @@ public void UpdateProvince(CRUDModel<ProvinceTbl> model)
             {
                 query.ProvinceName = model.Value.ProvinceName;
                 query.Description = model.Value.Description;
+                query.IsDelete = model.Value.IsDelete;
 
                 this.ProvincesUw.Update(query);
                 this.Save();
@@ -48,6 +49,17 @@ public void UpdateProvince(CRUDModel<ProvinceTbl> model)
             {
 	            query.IsDelete = true;
 	            this.ProvincesUw.Update(query);
+                this.Save();
+			}
+		}
+
+		public void RestoreProvince(int provinceId)
+		{
+			var query = this.ProvincesUw.GetById(provinceId);
+			if (query!=null)
+			{
+				query.IsDelete = false;
+                this.ProvincesUw.Update(query);
                 this.Save();
 			}
 		}

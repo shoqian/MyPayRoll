@@ -1,16 +1,8 @@
-﻿//	Query Cell Info
+﻿//	Query Cell Info Script
+// TODO تابع اطلاعات سلول جدول کاربران مشخص کردن دکمه‌ها بر اساس کاربر جاری و وضعیت کاربر
 function cellInfoFunc(args) {
 
 	var isCurrentUser = window.currentUserId && args.data.id === window.currentUserId;
-
-//	if (isCurrentUser) {
-//		$(args.row).classList.add("currentUser");
-//		$(args.row).classList.add("e-disabled");
-//
-//		$(args.row).attr("title", "کاربر جاری سیستم - امکان ویرایش خودش را ندارد");
-//
-////		$(args.row).prop("title", "کاربر جاری سیستم - امکان ویرایش خودش را ندارد");
-//	}
 
 	if (args.column["headerText"] === "عملیات") {
 		if (isCurrentUser) {

@@ -1,35 +1,84 @@
 ﻿@{
-	ViewData["AdminTitle"] = "لیست استان ها";
+		ViewData["AdminTitle"] = "لیست استان ها";
 
+	List<object> toolBarItem = new List<object>();
 
-	List<object> toolBarItem = new List<object>
+	toolBarItem.Add( "Add" ); // 1
+	toolBarItem.Add("Edit"); // 2
+
+	toolBarItem.Add(new // 3 - ProvinceDelete
 	{
-// #4 fix
-		new { type = "Add", title = "ایجاد استان جدید", buttonOption = new { iconCss = "e-icons e-plus", cssClass = "badge bg-outline-success btnAdd" } },
-		new { type = "Edit", title = "ویرایش استان", buttonOption = new { iconCss = "e-icons e-edit", cssClass = "badge bg-outline-warning btnEdit" } },
-		new { type = "Update", title = "ثبت ذخیره", buttonOption = new { iconCss = "e-icons e-save", cssClass = "badge bg-outline-secondary btnSave" } },
-		new { type = "Cancel", title = "لغو عملیات", buttonOption = new { iconCss = "e-icons e-circle-remove", cssClass = "badge bg-outline-dark btnCancel" } },
-		new { type = "ExcelExport", title = "خروجی اکسل", buttonOption = new { iconCss = "e-icons e-export-excel", cssClass = "badge bg-outline-primary btnExcel" } },
-		new { type = "Search", title = "جستجو در استان ها", buttonOption = new { iconCss = "e-icons e-search", cssClass = "badge bg-outline-info btnSearch" } },
-		new { type = "ProvinceDelete", title = "حذف استان", buttonOption = new { iconCss = "e-icons e-delete-3", cssClass = "badge bg-danger btnDelete" } },
-		new { type = "ProvinceRestore", title = "بازگردانی استان", buttonOption = new { iconCss = "e-icons e-redo", cssClass = "badge bg-info btnRestore" } }
-	};
+		text = "حذف استان",
+		tooltipText = "برای حذف استان استفاده میشود",
+		id = "provinceList_deleteSoft",
+		prefixIcon = "e-icons e-delete-3",
+		cssClass = "btn btn-outline-danger e-danger btn-sm"
+	});
 
+	toolBarItem.Add("Update"); // 4
+	toolBarItem.Add("Cancel"); // 5
+
+	toolBarItem.Add(new // 6 - ProvinceRestore
+	{
+		text = "بازگشت از حذف",
+		tooltipText = "برای بازگرداندن استان استفاده میشود",
+		id = "provinceList_restore",
+		prefixIcon = "e-icons e-redo",
+		cssClass = "btn btn-outline-info e-info btn-sm"
+	});
+
+	toolBarItem.Add("Search");
+
+
+	List<object>
+		commands = new List<object> 
+		{ 
+			new 
+			{ 
+				type = "deleteCmd", 
+				title = "حذف استان", 
+				buttonOption = new 
+				{ 
+					iconCss = "e-icons e-delete", 
+					cssClass = "badge bg-danger btnDelete" 
+				} 
+			},
+
+			new 
+			{
+				type = "restoreCmd", 
+				title = "بازگردانی استان", 
+				buttonOption = new 
+				{ 
+					iconCss = "e-icons e-redo", 
+					cssClass = "badge bg-info btnRestore" 
+				} 
+			}
+		};
 }
 
 <link href="~/css/SyncfusionComponentStyle.css" rel="stylesheet" />
-@* issue: من قصد دارم در برنامه زمانیکه استانی حذف می‌شود و روی لینک a کلیک میشه همه استان‌های حذف شده را نمایش دهم.به نحوی که فقط استان های حذف شده نشان داده شود. *@
-<div style="display: flex; font-size: 13px;">
-	<p style="margin-left: 20px;">تعداد کل استان‌های نمایش داده شده: <span id="spnRowProvince"></span></p>
-	<p style="margin-left: 20px;color:orangered;">تعداد کل استان‌های<a> حذف</a> شده: <span id="spnRowDelProvince" style="color: red;"></span></p>
-	<p style="margin-left: 20px;color:darkgreen;">تعداد کل استان‌های ثبت شده: <span id="spnRowAllProvince" style="color:greenyellow;"></span></p>
+
+<div class="btn-group mb-3" role="group" aria-label="انتخاب نوع نمایش استان">
+	<button type="button" class="btn btn-outline-success btn-sm" onclick="updateProvinceList('')">
+		<p style="margin-left: 20px;">تعداد استان‌های فعال : <span id="spnRowProvince" style="color: black;"></span></p>
+	</button>
+	<button type="button" class="btn btn-outline-danger btn-sm" onclick="updateProvinceList('delete')">
+		<p style="margin-left: 20px;">تعداد استان‌های حذف شده : <span id="spnRowDelProvince" style="color: red;"></span></p>
+	</button>
+	<button type="button" class="btn btn-outline-primary btn-sm" onclick="updateProvinceList('all')">
+		<p style="margin-left: 20px;">تعداد همه استان‌های ثبت شده: <span id="spnRowAllProvince" style="color: green;"></span></p>
+	</button>
 </div>
 
 <div class="row bg-white">
 	<div class="col-md-12">
 
-		<ejs-grid id="provinceList" created="createdFunc" toolbar="@toolBarItem" rowDataBound="rowDataBoundFunc" gridLines="Both"
-				  allowExcelExport allowFiltering allowPaging allowSorting>
+		<ejs-grid id="provinceList" created="createdFunc" toolbar="toolBarItem" rowDataBound="rowDataBoundFunc" gridLines="Both"
+		          allowExcelExport allowFiltering allowPaging allowSorting
+				  commandClick="commandsClickFuncSoft"
+		          toolbarClick="toolbarClickFunc"
+		          queryCellInfo="QueryCellFunc" >
 			<e-grid-pagesettings pageSize="10" pageCount="3"></e-grid-pagesettings>
 			<e-grid-filtersettings mode="Immediate" type="Menu"></e-grid-filtersettings>
 			<e-grid-editsettings allowAdding allowEditing allowDeleting showDeleteConfirmDialog mode="Normal"></e-grid-editsettings>
@@ -39,6 +88,7 @@
 				<e-grid-column field="ProvinceName" headerTemplate="#provinceHeader" textAlign="Right"></e-grid-column>
 				<e-grid-column field="Description" headerTemplate="#descriptionHeader" textAlign="Right"></e-grid-column>
 				<e-grid-column field="ProvinceId" visible="false" isPrimaryKey="true" allowEditing="false"></e-grid-column>
+				<e-grid-column commands="commands" headerText="عملیات" textAlign="Center" width="150"></e-grid-column>
 			</e-grid-columns>
 		</ejs-grid>
 
@@ -64,9 +114,13 @@
 		window.insertUrlProvince = '@Url.Action("Insert", "ProvinceManagement", new { area = "AdminArea" })';
 		window.updateUrlProvince = '@Url.Action("Update", "ProvinceManagement", new { area = "AdminArea" })';
 		window.deleteUrlProvince = '@Url.Action("Delete", "ProvinceManagement", new { area = "AdminArea" })';
+		window.restoreUrlProvince = '@Url.Action("Restore", "ProvinceManagement", new { area = "AdminArea" })';
 	</script>
 
-	<script src="~/Pages/ProvinceManegement/js/RowIndexScript.js" type="text/javascript"></script>
-	<script src="~/Pages/ProvinceManegement/js/CreateFuncScript.js" type="text/javascript"></script>
+	<script src="~/Pages/ProvinceManegement/js/RowIndexScript.js" type="text/javascript" asp-append-version="true"></script>
+	<script src="~/Pages/ProvinceManegement/js/CreateFuncScript.js" type="text/javascript" asp-append-version="true"></script>
+	<script src="~/Pages/ProvinceManegement/js/CommandScript.js" type="text/javascript" asp-append-version="true"></script>
+	<script src="~/Pages/ProvinceManegement/js/QueryCellScript.js" type="text/javascript" asp-append-version="true"></script>
+	<script src="~/Pages/ProvinceManegement/js/ToolbarClickScript.js" type="text/javascript" asp-append-version="true"></script>
 
 }

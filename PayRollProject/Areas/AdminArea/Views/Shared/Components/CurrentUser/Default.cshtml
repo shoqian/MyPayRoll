@@ -1,5 +1,4 @@
-﻿
-@model PayRollProject.ViewModels.CurrentUserViewModel
+﻿@model PayRollProject.ViewModels.CurrentUserViewModel
 
 @if (Model == null)
 {
@@ -12,10 +11,11 @@ else
 {
 	<div class="user-nav d-sm-flex d-none">
 		<span class="user-name">@Model.FullName</span>
-		<span class= 'user-status text-muted @(Model.IsActive ? "active" : "deactivate")'
-			  data-active="@((Model.IsActive).ToString().ToLower())"
-			  role="img"
-			  aria-label="@(Model.IsActive ? "فعال" : "غیره فعال")"></span>
+		<span class='user-status text-muted @(Model.IsActive ? "active" : "deactivate")'
+		      data-active="@((Model.IsActive).ToString().ToLower())"
+		      role="img"
+		      aria-label="@(Model.IsActive ? "فعال" : "غیره فعال")">
+		</span>
 	</div>
 	<span>
 		<img class="round" src="~/assets/images/portrait/large/avatar-mahdi-shoqian.png" alt="avatar" height="40" width="40" />
@@ -23,10 +23,10 @@ else
 }
 
 <script>
+	// TODO نمایش کاربر جاری در جاوااسکریپت برای استفاده در سایر کامپوننت‌ها
+	window.currentUserId = '@(Model?.Id)' || null;
 
-	window.currentUserId = '@(Model?.Id)' || null ;
-
-	console.log("Current User ID:", window.currentUserId);
+	// console.log("Current User ID:", window.currentUserId);
 
 
 </script>

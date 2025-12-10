@@ -136,7 +136,9 @@
       "SelectRow": "ردیف را انتخاب کنید",
       "AscendingText": "صعودی",
       "DescendingText": "نزولی",
-      "NoneText": "هیچ"
+      "NoneText": "هیچ",
+      "ProvinceDelete": "حذف استان",
+      "ProvinceRestore": "بازگرداندن استان"
     },
     "pager": {
       "currentPageInfo": "{0} از 1 {صفحه",
@@ -3555,14 +3557,14 @@
       "clear": "پاک کردن"
     },
     "chat-ui": {
-      "oneUserTyping": "{0} is typing",
-      "twoUserTyping": "{0} and {1} are typing",
-      "threeUserTyping": "{0}, {1}, and {2} other are typing",
-      "multipleUsersTyping": "{0}, {1}, and {2} others are typing",
-      "noRecordsTemplate": "No records found",
-      "forwarded": "Forwarded",
+      "oneUserTyping": "{0} تایپ میکنه",
+      "twoUserTyping": "{0} و {1} درحال تایپ کردن",
+      "threeUserTyping": "{0}, {1}, و {2} و دیگری درحال تایپ کردن",
+      "multipleUsersTyping": "{0}, {1}, و {2} و دیگری در حال تایپ کردن",
+      "noRecordsTemplate": "هیچ موردی یافت نشد",
+      "forwarded": "فرستاده شد.",
       "send": "ارسال کردن",
-      "attachments": "Attach File"
+      "attachments": "پیوست فایل"
     },
     "multicolumncombobox": {
       "noRecordsTemplate": "هیچ رکوردی یافت نشد"
@@ -3593,7 +3595,7 @@
       "linkUrlPlaceholder": "https://example.com",
       "linkTitle": "عنوان",
       "linkTitlePlaceholder": "Link title",
-      "linkOpenInNewWindow": "Open in new window",
+      "linkOpenInNewWindow": "بازکردن در پنجره جدید",
       "linkInsert": "Insert",
       "linkRemove": "برداشتن",
       "linkCancel": "لغو کردن",
