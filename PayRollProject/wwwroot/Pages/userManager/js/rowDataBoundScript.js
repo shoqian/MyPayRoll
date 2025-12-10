@@ -1,15 +1,8 @@
 ﻿
-// Region Row Data Bound Event
-
+// Region Row Data Bound Event #TODO بهینه‌سازی کد رویداد ردیف داده شده
 function rowDataBoundFunc(argsDataBound) {
-//	console.log(`This Event For RowDataBoundFunc Start `);
-//	console.log(argsDataBound);
-//	console.log(`This Event For RowDataBoundFunc End `);
 
-
-//	console.log(JSON.stringify(argsDataBound));
-
-	// مشخض کردن ردیف‌های غیرفعال
+	// #TODO مشخض کردن ردیف‌های کاربر غیرفعال
 	if (argsDataBound && argsDataBound.row) {
 		if (argsDataBound.data && argsDataBound.data.userFlag === 2) {
 			// Add the deactivate class when userFlag === 2
@@ -23,7 +16,7 @@ function rowDataBoundFunc(argsDataBound) {
 			argsDataBound.row.classList.add("currentUser");
 			argsDataBound.row.classList.add('e-disabled');
 
-			argsDataBound.row.setAttribute('title', "هرکاربری که فعال باشه نمی تونه خودش رو غیر فعال کنه");
+			argsDataBound.row.setAttribute('title', "هر کاربری که فعال باشه نمی تونه خودش رو غیر فعال کنه");
 			argsDataBound.row.dataset.userId = window.currentUserId;
 		} 
 
@@ -45,7 +38,7 @@ let indexNumber = (args) => {
 	}
 }
 
-// برای تعریف ردیف جدول
+// برای تعریف ردیف جدول #TODO بهینه‌سازی کد تعریف ردیف جدول
 function indexRow(e) {
 	let grid = document.getElementById('systemUser').ej2_instances[0];
 	//			if (grid.columns[0].headerText === "ردیف") {
@@ -57,10 +50,3 @@ function indexRow(e) {
 		e.row.cells[0].innerHTML = (startIndex + rowIndex);
 	}
 }
-
-//function rowDataBoundFunc(args) {
-//	console.log(args);
-//	if (args.data.userFlag === "2") {
-//		args.row.bgColor = '#efcdc3';
-//	}
-//}

@@ -1,39 +1,60 @@
 ﻿@{
 	ViewData["AdminTitle"] = "لیست استان ها";
 
-	List<object> toolBarItem = new List<object> { "Add", "Edit", "Update", "Cancel", "Search" };
+	List<object> toolBarItem = new List<object>();
 
-	toolBarItem.Add(new
+	toolBarItem.Add( "Add" ); // 1
+	toolBarItem.Add("Edit"); // 2
+
+	toolBarItem.Add(new // 3 - ProvinceDelete
 	{
-		text = "ProvinceDelete",
+		text = "حذف استان",
 		tooltipText = "برای حذف استان استفاده میشود",
-		id = "provinceDeleteBtn",
+		id = "provinceList_deleteSoft",
 		prefixIcon = "e-icons e-delete-3",
-		type = "ProvinceDelete",
-		title = "حذف استان",
-		buttonOption = new
-		{
-			iconCss = "e-icons e-delete-3",
-			cssClass = "btn btn-danger btnDelete"
-		}
+		cssClass = "btn btn-outline-danger e-danger btn-sm"
 	});
-	toolBarItem.Add(new
+
+	toolBarItem.Add("Update"); // 4
+	toolBarItem.Add("Cancel"); // 5
+
+	toolBarItem.Add(new // 6 - ProvinceRestore
 	{
-		text = "ProvinceRestore",
+		text = "بازگشت از حذف",
 		tooltipText = "برای بازگرداندن استان استفاده میشود",
-		id = "provinceRestoreBtn",
+		id = "provinceList_restore",
 		prefixIcon = "e-icons e-redo",
-		type = "ProvinceRestore",
-		title = "بازگردانی استان",
-		buttonOption = new
-		{
-			iconCss = "e-icons e-redo",
-			cssClass = "badge bg-info btnRestore"
-		}
+		cssClass = "btn btn-outline-info e-info btn-sm"
 	});
+
+	toolBarItem.Add("Search");
+
 
 	List<object>
-		commands = new List<object> { new { type = "deleteCmd", title = "حذف استان", buttonOption = new { iconCss = "e-icons e-delete", cssClass = "badge bg-danger btnDelete" } }, new { type = "restoreCmd", title = "بازگردانی استان", buttonOption = new { iconCss = "e-icons e-redo", cssClass = "badge bg-info btnRestore" } }, };
+		commands = new List<object> 
+		{ 
+			new 
+			{ 
+				type = "deleteCmd", 
+				title = "حذف استان", 
+				buttonOption = new 
+				{ 
+					iconCss = "e-icons e-delete", 
+					cssClass = "badge bg-danger btnDelete" 
+				} 
+			},
+
+			new 
+			{
+				type = "restoreCmd", 
+				title = "بازگردانی استان", 
+				buttonOption = new 
+				{ 
+					iconCss = "e-icons e-redo", 
+					cssClass = "badge bg-info btnRestore" 
+				} 
+			}
+		};
 }
 
 <link href="~/css/SyncfusionComponentStyle.css" rel="stylesheet" />
@@ -54,9 +75,10 @@
 	<div class="col-md-12">
 
 		<ejs-grid id="provinceList" created="createdFunc" toolbar="toolBarItem" rowDataBound="rowDataBoundFunc" gridLines="Both"
-				  allowExcelExport allowFiltering allowPaging allowSorting
-				  toolbarClick="toolbarClickFunc"
-				  queryCellInfo="QueryCellFunc" commandClick="commandsClickFunc">
+		          allowExcelExport allowFiltering allowPaging allowSorting
+				  commandClick="commandsClickFuncSoft"
+		          toolbarClick="toolbarClickFunc"
+		          queryCellInfo="QueryCellFunc" >
 			<e-grid-pagesettings pageSize="10" pageCount="3"></e-grid-pagesettings>
 			<e-grid-filtersettings mode="Immediate" type="Menu"></e-grid-filtersettings>
 			<e-grid-editsettings allowAdding allowEditing allowDeleting showDeleteConfirmDialog mode="Normal"></e-grid-editsettings>

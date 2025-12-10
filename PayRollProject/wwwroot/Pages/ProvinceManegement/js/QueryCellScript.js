@@ -1,5 +1,4 @@
 ﻿function QueryCellFunc(args) {
-	console.log(args);
 
 	if (args.column["headerText"] === "عملیات" && args.data["isDelete"] === true) {
 		$(args.cell).find('.btnDelete')[0].classList.add('e-hide');

@@ -1,4 +1,5 @@
 ﻿// <!-- generate dropdown for userType -->
+// #TODO معرفی نوع کاربر در جدول کاربران
 
 let userTypeVal;
 let userTypeObj;

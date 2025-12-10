@@ -3,11 +3,9 @@
 
 let DialogObj;
 
-
+// TODO آدرس‌های غیر فعال سازی و فعال سازی کاربران
 function commandClickFunc (args) {
 //	console.log(`این مقادر داخلی Command Click Function هستش ${JSON.stringify(args)} ....`);
-
-
 
 	if (args.commandColumn.type === "deleteCommand") {
 		DialogObj = ej.popups.DialogUtility.confirm({
@@ -27,7 +25,6 @@ function commandClickFunc (args) {
 	}
 
 //	url: "/AdminArea/UserManager/DeactivateUser",
-
 	function okClick (e) {
 		let ajax = new ej.base.Ajax({
 			url: deactivateUrl,
@@ -42,9 +39,6 @@ function commandClickFunc (args) {
 			grid.refresh();
 		};
 	}
-
-
-	//////
 
 	if (args.commandColumn.type === "returnCommand") {
 		DialogObj = ej.popups.DialogUtility.confirm({

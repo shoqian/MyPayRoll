@@ -1,13 +1,14 @@
-﻿let DialogObj;
+﻿let DialogObjCmd;
 
-let commandsClickFunc =(args) => {
+function commandsClickFunc (args) {
+
 	if (args.commandColumn.type === 'deleteCmd') {
-		DialogObj = ej.popups.DialogUtility.confirm({
+		DialogObjCmd = ej.popups.DialogUtility.confirm({
 			title: `<span class="e-badge e-badge-danger e-badge-pill" > غیرفعال کردن استان </span>`,
 			content: `آیا از غیرفعال کردن استان <span style="color:red;font-weight:bold;" >${args.rowData.province
 				}</span> مطمئن هستید ؟`,
 			okButton: {
-				icon: 'e-icons e',
+				icon: 'e-icons e-download',
 				cssClass: 'badge bg-success okConfirm',
 				click: function() { okDeleteClick(args); },
 				text: "بله"
@@ -23,8 +24,9 @@ let commandsClickFunc =(args) => {
 			animationSettings: { effect: "Zoom", duration: 700 }
 		});
 	}
+
 	if (args.commandColumn.type === 'restoreCmd') {
-		DialogObj = ej.popups.DialogUtility.confirm({
+		DialogObjCmd = ej.popups.DialogUtility.confirm({
 			title: `<span class="e-badge e-badge-success e-badge-pill" > فعال کردن استان </span>`,
 			content: `آیا از فعال کردن استان <span style="color:green;font-weight:bold;" >${args.rowData.province
 				} اطمینان دارید؟ `,
@@ -45,7 +47,6 @@ let commandsClickFunc =(args) => {
 			animationSettings: { effect: "Zoom", duration: 700 }
 		});
 	}
-
 	function okDeleteClick(e) {
 		let ajax = new ej.base.Ajax({
 			url: window.deleteUrlProvince,
@@ -61,7 +62,7 @@ let commandsClickFunc =(args) => {
 		}
 	}
 
-	function okRestoreClick(e) {
+	function okRestoreClick (e) {
 		let ajax = new ej.base.Ajax({
 			url: window.restoreUrlProvince,
 			type: "POST",
@@ -79,5 +80,19 @@ let commandsClickFunc =(args) => {
 	function cancelClick(eArgs) {
 		DialogObj.hide();
 	}
+}
 
+function commandsClickFuncSoft(args) {
+	let rowData = args.rowData;
+
+	switch (args.commandColumn.type) {
+		case 'deleteCmd':
+			handleProvinceSoftDelete('delete', rowData); 
+			break;
+
+		case 'restoreCmd':
+			handleProvinceSoftDelete('restore', rowData);
+			break;
+	
+	}
 }

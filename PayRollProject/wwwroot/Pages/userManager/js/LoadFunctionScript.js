@@ -1,32 +1,46 @@
 ﻿// Load Function Script
 // Validation National Code
 // Load Function - Validation
-// تابع در هنگام لود جدول و برای اعتبارسنجی داده‌های ورودی
+// تابع در هنگام لود جدول و برای اعتبارسنجی داده‌های ورودی #TODO اعتبارسنجی جدول کاربران
 
 function loadFunc (e) {
-	this.columns[1].validationRules = { required: [true, "وارد کردن نام اجباری است."] }; // نام
-	this.columns[2].validationRules = { required: [true, "وارد کردن نام خانوادگی اجباری است."] }; // نام خانوادگی
-	this.columns[3].validationRules = { // شماره تلفن همراه
+
+	// اعتبارسنجی فیلد نام
+	this.columns[1].validationRules = { required: [true, "وارد کردن نام اجباری است."] };
+
+	// اعتبارسنجی فیلد نام خانوادگی
+	this.columns[2].validationRules = { required: [true, "وارد کردن نام خانوادگی اجباری است."] };
+
+	// اعتبارسنجی فیلد شماره تلفن همراه
+	this.columns[3].validationRules = { 
 		required: [true, "وارد کردن شماره تلفن اجباری است."],
 		minLength: [11, " شماره تلفن همراه 11 رقم می باشد."],
 		maxLength: [11, " شماره تلفن همراه 11 رقم می باشد."],
 		custom: [validationPhone, "ورودی باید 09 و شماره تلفن باشد."]
 	};
-	this.columns[4].validationRules = { // کدملی
+
+	// اعتبارسنجی فیلد کدملی
+	this.columns[4].validationRules = {
 		required: [true, "وارد کردن کدملی اجباری است."],
 		minLength: [10, "کد ملی باید 10 رقم باشد."],
 		maxLength: [10, "کد ملی باید 10 رقم باشد."],
 		custom: [validationMelliCode, "کد ملی معتبر نیست."]
 	};
-	this.columns[5].validationRules = { // ایمیل
+
+	// اعتبارسنجی فیلد ایمیل
+	this.columns[5].validationRules = { 
 		required: [true, "وارد کردن ایمیل اجباری است."],
 		email: [true, "عبارت واد شده ایمیل نمی باشد. لطفا بررسی کنید."]
 	}
 }
+
+// تابع اجرایی برای سنجش کد ملی #TODO تابع اجرایی کدملی
 function validationMelliCode (args) {
 	return validationNationalCode(args.value);
 }
 
+
+// تابع تشخیص شماره تلفن همراه #TODO تابع تشخیص تلفن همراه
 function validationPhone (args) {
 	const reg = /^09\d{9}$/;
 
@@ -34,7 +48,7 @@ function validationPhone (args) {
 }
 
 
-// تابع اعتبارسنجی کد ملی
+// تابع اعتبارسنجی کد ملی #TODO تابع اعتبارسنجی کد ملی
 let validationNationalCode = (code) => {
 	let reg = /^[0-9]{10}$/;
 	if (!reg.test(code)) {

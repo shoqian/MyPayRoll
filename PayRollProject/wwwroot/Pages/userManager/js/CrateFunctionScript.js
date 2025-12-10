@@ -1,20 +1,18 @@
 ﻿//  Created Function Script For User Manager Page
 // غیرفعال کردن خاصیت اتوکامپلیت
-
+// TODO تابع ایجاد شده برای صفحه مدیریت کاربران
 function CreatedFunc (args) {
 
-	console.log(args);
-
-	let grid = document.querySelector('#systemUser').ej2_instances[0];
+	let grid = getGridUsers();
 
 	//برای کنترل مقادیر
 	class customAdaptor extends ej.data.UrlAdaptor {
 		processResponse (data, ds, query, xhr, request, changes) {
 
 			// لاگ برای تشخیص دقیق شکل پاسخ
-			console.log('CustomAdaptor.processResponse:', data, { ds, query, xhr, request, changes });
+			// console.log('CustomAdaptor.processResponse:', data, { ds, query, xhr, request, changes });
 
-
+			// #TODO شرط برای بررسی وجود اکشن در پاسخ
 			if (!ej.base.isNullOrUndefined(data.action)) {
 				if (data.action === "fetchGrid") {
 					$("#spanAllUser").text(data.countAll);
@@ -73,17 +71,15 @@ function CreatedFunc (args) {
 		}
 	}
 
-
-//	url: "/AdminArea/UserManager/FetchUserList",
-//		insertUrl: "/AdminArea/UserManager/Insert",
-//		updateUrl: "/AdminArea/UserManager/Update",
-
-	//دریافت اطلاعات از دیتابیس به روش api
-
+	// #TODO دریافت اطلاعات از دیتابیس به روش api
 	grid.dataSource = new ej.data.DataManager({
 		url: baseUrl,
 		insertUrl: insertUrl,
 		updateUrl: updateUrl,
 		adaptor: new customAdaptor()
 	});
+}
+
+function getGridUsers() {
+	return document.querySelector('#systemUser').ej2_instances[0];
 }

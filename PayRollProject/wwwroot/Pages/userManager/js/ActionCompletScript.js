@@ -1,14 +1,13 @@
-﻿// Action Complete Script
-
+﻿// Action Complete Script #TODO اسکریپت تکمیل عملیات
 function actionCompleteFunc (args) {
-	//غیرفعال کردن خاصیت اتوکامپلیت
+	//غیرفعال کردن خاصیت اتوکامپلیت #TODO غیرفعال کردن اتوکامپلیت
 	$("input").attr("autoComplete", "off");
 
-	console.log(args);
 
 	if (args.requestType === "add" || args.requestType === "beginEdit") {
 		let statusVar = "systemUseruserFlagText";
-		//				id = "systemUseruserFlagText"
+
+
 		// برای غیرفعال کردن فعال یا غیرفعال بودن کاربر
 		args.form.elements[statusVar].ej2_instances[0].enabled = false;
 
@@ -25,6 +24,7 @@ function actionCompleteFunc (args) {
 		args.form.elements[statusVar].ej2_instances[0].refresh();
 	}
 
+	// در حالت ویرایش #TODO وضعیت دکمهها در حالت ویرایش
 	if (args.requestType === "beginEdit") {
 		// نوع وضعیت کاربر نباید در حالت ویرایش تغییر کند
 		args.form.elements["systemUseruserTypeText"].ej2_instances[0].enabled = false;

@@ -121,17 +121,17 @@ namespace PayRollProject.Areas.AdminArea.Controllers
 		{
 			try
 			{
-				var provinces = this._context.ProvincesUw.Get();
+				// var provinces = this._context.ProvincesUw.Get();
 
-				if (provinces.Any(p => p.ProvinceName == model.Value.ProvinceName))
-				{
-					return Json(new { action = "repeat", province = model.Value.ProvinceName });
-				}
-				else
-				{
+				// if (provinces.Any(p => p.ProvinceName == model.Value.ProvinceName))
+				// {
+					// return Json(new { action = "repeat", province = model.Value.ProvinceName });
+				// }
+				// else
+				// {
 					_repository.UpdateProvince(model);
 					return Json(new { action = "update", province = model.Value.ProvinceName });
-				}
+				// }
 			}
 			catch (Exception e)
 			{

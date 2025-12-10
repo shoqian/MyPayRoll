@@ -35,6 +35,7 @@ public void UpdateProvince(CRUDModel<ProvinceTbl> model)
             {
                 query.ProvinceName = model.Value.ProvinceName;
                 query.Description = model.Value.Description;
+                query.IsDelete = model.Value.IsDelete;
 
                 this.ProvincesUw.Update(query);
                 this.Save();
