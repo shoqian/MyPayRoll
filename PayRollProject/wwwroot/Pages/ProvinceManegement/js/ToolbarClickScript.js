@@ -17,20 +17,20 @@
 		return;
 	}
 
-		// console.log("Selected record :",selectedRecords);
+	// console.log("Selected record :",selectedRecords);
 
-		let rowData = selectedRecords[0];
+	let rowData = selectedRecords[0];
 
-		updateToolbarDeleteRestor(rowData);
+	updateToolbarDeleteRestor(rowData);
 
-		switch (args.item.id) {
-			case 'provinceList_deleteSoft':
-				handleProvinceSoftDelete('delete', rowData);
-				break;
+	switch (args.item.id) {
+	case 'provinceList_deleteSoft':
+		handleProvinceSoftDelete('delete', rowData);
+		break;
 
-			case 'provinceList_restore':
-				handleProvinceSoftDelete('restore', rowData);
-				break;
+	case 'provinceList_restore':
+		handleProvinceSoftDelete('restore', rowData);
+		break;
 
-		}
+	}
 }
