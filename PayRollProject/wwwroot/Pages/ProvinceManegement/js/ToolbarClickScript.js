@@ -2,7 +2,10 @@
 	let grid = getProvinceGrid();
 	let selectedRecords = grid.getSelectedRecords() || [];
 
-	if (selectedRecords.length <= 0) {
+	if (selectedRecords.length > 0) {
+		updateToolbarDeleteRestore(selectedRecords[0]);
+	} else {
+		updateToolbarDeleteRestore(null);
 		ej.popups.DialogUtility.alert({
 			title: `<span class="e-badge e-badge-danger e-badge-pill" > هشدار </span>`,
 			content: `لطفا یک رکورد را انتخاب نمایید.`,
@@ -11,9 +14,6 @@
 			closeOnEscape: true,
 			animationSettings: { effect: "Zoom", duration: 700 }
 		});
-
-		updateToolbarDeleteRestore(selectedRecords[0]);
-
 		return;
 	}
 

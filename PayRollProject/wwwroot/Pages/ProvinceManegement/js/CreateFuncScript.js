@@ -225,6 +225,7 @@ function createdFunc(args) {
 	styleBuiltInButtons();
 
 	updateToolbarDeleteRestore(null);
+	ProvinceRowSelected(args);
 }
 
 function updateToolbarDeleteRestore(rowData) {
@@ -235,29 +236,28 @@ function updateToolbarDeleteRestore(rowData) {
 	console.log("Method is : updateToolbarDeleteRestore()");
 	console.log("grid :",grid);
 
-	console.log(grid.toolbarModule.rowSelected());
-
 
 	if (!grid || !grid.toolbarModule) return;
+
+	let deleteBtnId = 'provinceList_deleteSoft';
+	let restoreBtnId = 'provinceList_restore';
 
 	let ids = ['provinceList_deleteSoft', 'provinceList_restore'];
 
 	
 	// پیش فرض غیر فعال کردن هر دو دکمه
-	grid.toolbarModule.enableItems(ids, false);
-//	grid.toolbarModule.hiden(ids, false);
+//	grid.toolbarModule.enableItems(ids, false);
+	grid.toolbarModule.enableItems([deleteBtnId, restoreBtnId], false);
 
-	if (!rowData) return;
+	if (!rowData || typeof rowData !== 'object') return;
 
-	let isDelete = rowData.IsDelete;
-	if (typeof isDelete === 'undefined') {
-		isDelete = rowData.isDelete;
-	}
+	let isDelete = rowData.IsDelete !== undefined ? rowData.IsDelete : rowData.isDelete;
 
 
 	console.log("Address File: \\wwwroot\\Pages\\ProvinceManagement\\js\\CreateFuncScript.js ");
 	console.log("Method is : updateToolbarDeleteRestore()");
-	console.log(rowData);
+	console.log("rowDate :", rowData);
+	console.log("isDelete :", isDelete);
 
 
 	if (isDelete) {
@@ -265,5 +265,28 @@ function updateToolbarDeleteRestore(rowData) {
 	} else {
 		grid.toolbarModule.enableItems(['provinceList_deleteSoft'], true);
 	}
+
+}
+
+function ProvinceRowSelected(e) {
+	let grid = getProvinceGrid();
+
+	grid.rowSelected = (e) => {
+		let selectedRecords = grid.getSelectedRecords();
+		if (selectedRecords && selectedRecords.length > 0) {
+			updateToolbarDeleteRestore(selectedRecords[0]);
+		} else {
+			updateToolbarDeleteRestore(null);
+		}
+	};
+
+	grid.rowDeselected = (e) => {
+		let selectedRecords = grid.getSelectedRecords();
+		if (selectedRecords && selectedRecords.length > 0) {
+			updateToolbarDeleteRestore(selectedRecords[0]);
+		} else {
+			updateToolbarDeleteRestore(null);
+		}
+	};
 
 }
