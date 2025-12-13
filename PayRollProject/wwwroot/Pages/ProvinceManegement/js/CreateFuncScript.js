@@ -224,18 +224,28 @@ function createdFunc(args) {
 
 	styleBuiltInButtons();
 
-	updateToolbarDeleteRestor(null);
+	updateToolbarDeleteRestore(null);
 }
 
-function updateToolbarDeleteRestor(rowData) {
+function updateToolbarDeleteRestore(rowData) {
 	let grid = getProvinceGrid();
+
+
+	console.log("Address File: \\wwwroot\\Pages\\ProvinceManagement\\js\\CreateFuncScript.js ");
+	console.log("Method is : updateToolbarDeleteRestore()");
+	console.log("grid :",grid);
+
+	console.log(grid.toolbarModule.rowSelected());
+
 
 	if (!grid || !grid.toolbarModule) return;
 
 	let ids = ['provinceList_deleteSoft', 'provinceList_restore'];
 
+	
 	// پیش فرض غیر فعال کردن هر دو دکمه
 	grid.toolbarModule.enableItems(ids, false);
+//	grid.toolbarModule.hiden(ids, false);
 
 	if (!rowData) return;
 
@@ -244,7 +254,10 @@ function updateToolbarDeleteRestor(rowData) {
 		isDelete = rowData.isDelete;
 	}
 
-	//console.log(select, isDelete);
+
+	console.log("Address File: \\wwwroot\\Pages\\ProvinceManagement\\js\\CreateFuncScript.js ");
+	console.log("Method is : updateToolbarDeleteRestore()");
+	console.log(rowData);
 
 
 	if (isDelete) {

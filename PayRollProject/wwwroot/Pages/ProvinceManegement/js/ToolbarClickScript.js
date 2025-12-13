@@ -1,8 +1,8 @@
 ﻿let toolbarClickFunc = (args) => {
 	let grid = getProvinceGrid();
-	let selectedRecords = grid.getSelectedRecords();
+	let selectedRecords = grid.getSelectedRecords() || [];
 
-	if (!selectedRecords) {
+	if (selectedRecords.length <= 0) {
 		ej.popups.DialogUtility.alert({
 			title: `<span class="e-badge e-badge-danger e-badge-pill" > هشدار </span>`,
 			content: `لطفا یک رکورد را انتخاب نمایید.`,
@@ -12,16 +12,21 @@
 			animationSettings: { effect: "Zoom", duration: 700 }
 		});
 
-		updateToolbarDeleteRestor(null);
+		updateToolbarDeleteRestore(selectedRecords[0]);
 
 		return;
 	}
 
-	// console.log("Selected record :",selectedRecords);
+	
 
 	let rowData = selectedRecords[0];
 
-	updateToolbarDeleteRestor(rowData);
+	// #TODO log rowData ---
+	console.log("Address File => \\wwwroot\\Pages\\ProvinceManagement\\js\\ToolbarClickScript.js ");
+	console.log("Method is => toolbarClickFunc()");
+	console.log(rowData);
+
+	updateToolbarDeleteRestore(rowData);
 
 	switch (args.item.id) {
 	case 'provinceList_deleteSoft':
