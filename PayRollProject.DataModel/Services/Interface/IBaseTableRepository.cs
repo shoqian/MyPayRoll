@@ -13,5 +13,11 @@ void DeleteProvince(int provinceId);
 
 void RestoreProvince(int provinceId);
 
-	}
+        void UpdateCity(CRUDModel<CitiesTbl> model);
+
+        void DeleteCity(int cityId);
+
+        void RestoreCity(int cityId);
+
+        }
 }

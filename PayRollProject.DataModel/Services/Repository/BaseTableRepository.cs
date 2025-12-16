@@ -40,28 +40,65 @@ public void UpdateProvince(CRUDModel<ProvinceTbl> model)
                 this.ProvincesUw.Update(query);
                 this.Save();
             }
-		}
+                }
 
-		public void DeleteProvince(int provinceId)
-		{
-			var query = this.ProvincesUw.GetById(provinceId);
+                public void DeleteProvince(int provinceId)
+                {
+                        var query = this.ProvincesUw.GetById(provinceId);
             if (query != null)
             {
-	            query.IsDelete = true;
-	            this.ProvincesUw.Update(query);
+                    query.IsDelete = true;
+                    this.ProvincesUw.Update(query);
                 this.Save();
-			}
-		}
+                        }
+                }
 
-		public void RestoreProvince(int provinceId)
-		{
-			var query = this.ProvincesUw.GetById(provinceId);
-			if (query!=null)
-			{
-				query.IsDelete = false;
+                public void RestoreProvince(int provinceId)
+                {
+                        var query = this.ProvincesUw.GetById(provinceId);
+                        if (query!=null)
+                        {
+                                query.IsDelete = false;
                 this.ProvincesUw.Update(query);
                 this.Save();
-			}
-		}
+                        }
+                }
+
+        public void UpdateCity(CRUDModel<CitiesTbl> model)
+        {
+            var query = this.CitiesUw.GetById(model.Value.CityId);
+            if (query != null)
+            {
+                query.CityName = model.Value.CityName;
+                query.Description = model.Value.Description;
+                query.IsDelete = model.Value.IsDelete;
+                query.ProvinceID = model.Value.ProvinceID;
+
+                this.CitiesUw.Update(query);
+                this.Save();
+            }
+        }
+
+        public void DeleteCity(int cityId)
+        {
+            var query = this.CitiesUw.GetById(cityId);
+            if (query != null)
+            {
+                query.IsDelete = true;
+                this.CitiesUw.Update(query);
+                this.Save();
+            }
+        }
+
+        public void RestoreCity(int cityId)
+        {
+            var query = this.CitiesUw.GetById(cityId);
+            if (query != null)
+            {
+                query.IsDelete = false;
+                this.CitiesUw.Update(query);
+                this.Save();
+            }
+        }
     }
 }

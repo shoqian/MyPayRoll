@@ -1,1 +1,126 @@
-﻿
+﻿@using System.Text.Json
+
+@{
+        List<object> toolBarItem = new List<object>();
+
+        toolBarItem.Add("Add");
+        toolBarItem.Add("Edit");
+
+        toolBarItem.Add(new
+        {
+                text = "حذف شهر",
+                tooltipText = "برای حذف شهر استفاده میشود",
+                id = "cityList_deleteSoft",
+                prefixIcon = "e-icons e-delete-3",
+                cssClass = "btn btn-outline-danger e-danger btn-sm"
+        });
+
+        toolBarItem.Add("Update");
+        toolBarItem.Add("Cancel");
+
+        toolBarItem.Add(new
+        {
+                text = "بازگشت از حذف",
+                tooltipText = "برای بازگرداندن شهر استفاده میشود",
+                id = "cityList_restore",
+                prefixIcon = "e-icons e-redo",
+                cssClass = "btn btn-outline-info e-info btn-sm"
+        });
+
+        toolBarItem.Add("Search");
+
+        List<object>
+                commands = new List<object>
+                {
+                        new
+                        {
+                                type = "deleteCmd",
+                                title = "حذف شهر",
+                                buttonOption = new
+                                {
+                                        iconCss = "e-icons e-delete",
+                                        cssClass = "badge bg-danger btnDelete"
+                                }
+                        },
+
+                        new
+                        {
+                                type = "restoreCmd",
+                                title = "بازگردانی شهر",
+                                buttonOption = new
+                                {
+                                        iconCss = "e-icons e-redo",
+                                        cssClass = "badge bg-info btnRestore"
+                                }
+                        }
+                };
+}
+
+<link href="~/css/SyncfusionComponentStyle.css" rel="stylesheet" />
+
+<div class="btn-group mb-3" role="group" aria-label="انتخاب نوع نمایش شهر">
+        <button type="button" class="btn btn-outline-success btn-sm" onclick="updateCityList('')">
+                <p style="margin-left: 20px;">تعداد شهرهای فعال : <span id="spnRowCity" style="color: black;"></span></p>
+        </button>
+        <button type="button" class="btn btn-outline-danger btn-sm" onclick="updateCityList('delete')">
+                <p style="margin-left: 20px;">تعداد شهرهای حذف شده : <span id="spnRowDelCity" style="color: red;"></span></p>
+        </button>
+        <button type="button" class="btn btn-outline-primary btn-sm" onclick="updateCityList('all')">
+                <p style="margin-left: 20px;">تعداد همه شهرهای ثبت شده: <span id="spnRowAllCity" style="color: green;"></span></p>
+        </button>
+</div>
+
+<div class="row bg-white">
+        <div class="col-md-12">
+
+                <ejs-grid id="cityList" created="cityCreated" toolbar="toolBarItem" rowDataBound="cityRowDataBound" gridLines="Both"
+                          allowExcelExport allowFiltering allowPaging allowSorting
+                          commandClick="cityCommandClick"
+                          toolbarClick="cityToolbarClick"
+                          queryCellInfo="cityQueryCell" >
+                        <e-grid-pagesettings pageSize="10" pageCount="3"></e-grid-pagesettings>
+                        <e-grid-filtersettings mode="Immediate" type="Menu"></e-grid-filtersettings>
+                        <e-grid-editsettings allowAdding allowEditing allowDeleting showDeleteConfirmDialog mode="Normal"></e-grid-editsettings>
+
+                        <e-grid-columns>
+                                <e-grid-column field="rowIndex" headerText="ردیف" width="90" allowEditing="false" allowSorting="false" allowFiltering="false" textAlign="Right"></e-grid-column>
+                                <e-grid-column field="ProvinceID" headerTemplate="#provinceHeader" foreignKeyField="ProvinceId" foreignKeyValue="ProvinceName" dataSource="@(ViewBag.Provinces)" textAlign="Right"></e-grid-column>
+                                <e-grid-column field="CityName" headerTemplate="#cityHeader" textAlign="Right"></e-grid-column>
+                                <e-grid-column field="Description" headerTemplate="#descriptionHeader" textAlign="Right"></e-grid-column>
+                                <e-grid-column field="CityId" visible="false" isPrimaryKey="true" allowEditing="false"></e-grid-column>
+                                <e-grid-column commands="commands" headerText="عملیات" textAlign="Center" width="150"></e-grid-column>
+                        </e-grid-columns>
+                </ejs-grid>
+
+        </div>
+</div>
+
+
+@section AdminScripts {
+
+        <!-- برای نمایش ستون نام استان Header Template -->
+        <script id="provinceHeader" type="text/x-template">
+                <span class="e-icons e-home" style="font-size:15px;"></span> نام استان
+        </script>
+
+        <!-- برای نمایش ستون نام شهر Header Template -->
+        <script id="cityHeader" type="text/x-template">
+                <span class="e-icons e-location" style="font-size:15px;"></span> نام شهر
+        </script>
+
+        <!-- برای نمایش ستون توضیحات Header Template -->
+        <script id="descriptionHeader" type="text/x-template">
+                <span class="e-icons e-header" style="font-size:15px;"></span> توضیحات
+        </script>
+
+        <script>
+                window.baseUrlCity = '@Url.Action("FetchCityList", "CityManagement", new { area = "AdminArea" })';
+                window.insertUrlCity = '@Url.Action("Insert", "CityManagement", new { area = "AdminArea" })';
+                window.updateUrlCity = '@Url.Action("Update", "CityManagement", new { area = "AdminArea" })';
+                window.deleteUrlCity = '@Url.Action("Delete", "CityManagement", new { area = "AdminArea" })';
+                window.restoreUrlCity = '@Url.Action("Restore", "CityManagement", new { area = "AdminArea" })';
+                window.cityProvinces = @Html.Raw(JsonSerializer.Serialize(ViewBag.Provinces ?? new List<object>()));
+        </script>
+
+        <script type="module" src="~/Pages/CityManagement/dist/cityManagement.js" asp-append-version="true"></script>
+}
