@@ -3,6 +3,7 @@ using PayRollProject.DataModel;
 using PayRollProject.DataModel.Seeder;
 using PayRollProject.Entities.Entities;
 using Syncfusion.Licensing;
+using Vite.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,10 +21,12 @@ builder.Services.AddIdentityService();
 
 #region Add Services
 
+builder.Services.AddViteServices();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IBaseTableRepository, BaseTableRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IAuditService, AuditService>();
+
 
 #endregion
 
@@ -91,6 +94,8 @@ if (app.Environment.IsDevelopment())
 			}
 		}
 	}
+
+	
 }
 else
 {
@@ -115,6 +120,7 @@ if (!app.Environment.IsDevelopment())
 	app.UseExceptionHandler("/Home/Error");
 	// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
 	app.UseHsts();
+	app.UseViteDevelopmentServer(true);
 }
 
 app.UseHttpsRedirection();

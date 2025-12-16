@@ -17,11 +17,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\pages\province\events.ts" />
+    <None Remove="Assets\pages\province\grid.ts" />
+    <None Remove="Assets\pages\province\index.ts" />
+    <None Remove="Assets\pages\province\init.ts" />
+    <None Remove="Assets\pages\province\toolbar.ts" />
+    <None Remove="Assets\shared\logger.ts" />
+    <None Remove="vite.config.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\PayRollProject.WebFrameWork\PayRollProject.WebFrameWork.csproj" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.8" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.0" />
     <PackageReference Include="Syncfusion.EJ2.AspNet.Core" Version="29.1.33" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Vite.AspNetCore" Version="2.4.1" />
 
   </ItemGroup>
 
@@ -29,7 +40,20 @@
     <Folder Include="Areas\AdminArea\Data\" />
     <Folder Include="Areas\AdminArea\Models\" />
     <Folder Include="wwwroot\assets\icon\" />
+    <Folder Include="wwwroot\dist\" />
     <Folder Include="wwwroot\Pages\userManager\css\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="Assets\pages\province\dialogs.ts" />
+    <TypeScriptCompile Include="Assets\pages\province\events.ts" />
+    <TypeScriptCompile Include="Assets\pages\province\grid.ts" />
+    <TypeScriptCompile Include="Assets\pages\province\index.ts" />
+    <TypeScriptCompile Include="Assets\pages\province\init.ts" />
+    <TypeScriptCompile Include="Assets\pages\province\toolbar.ts" />
+    <TypeScriptCompile Include="Assets\shared\logger.ts" />
+    <TypeScriptCompile Include="Assets\pages\province\types.ts" />
+    <TypeScriptCompile Include="vite.config.ts" />
   </ItemGroup>
 
 </Project>

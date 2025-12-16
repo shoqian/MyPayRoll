@@ -1,4 +1,13 @@
-﻿function getProvinceGrid() {
+﻿const DEBUG = false;
+
+function log(...args) {
+	if (DEBUG) {
+		console.log(...args);
+	}
+}
+
+
+function getProvinceGrid() {
 	return document.getElementById('provinceList').ej2_instances[0];
 }
 
@@ -56,6 +65,7 @@ function styleBuiltInButtons() {
 			}
 		},
 		100);
+	
 }
 
 function handleProvinceSoftDelete(action, rowData) {
@@ -234,7 +244,7 @@ function updateToolbarDeleteRestore(rowData) {
 
 	console.log("Address File: \\wwwroot\\Pages\\ProvinceManagement\\js\\CreateFuncScript.js ");
 	console.log("Method is : updateToolbarDeleteRestore()");
-	console.log("grid :",grid);
+	console.log("grid :", grid);
 
 
 	if (!grid || !grid.toolbarModule) return;
@@ -244,14 +254,15 @@ function updateToolbarDeleteRestore(rowData) {
 
 	let ids = ['provinceList_deleteSoft', 'provinceList_restore'];
 
-	
+
 	// پیش فرض غیر فعال کردن هر دو دکمه
 //	grid.toolbarModule.enableItems(ids, false);
 	grid.toolbarModule.enableItems([deleteBtnId, restoreBtnId], false);
 
 	if (!rowData || typeof rowData !== 'object') return;
 
-	let isDelete = rowData.IsDelete !== undefined ? rowData.IsDelete : rowData.isDelete;
+//	let isDelete = rowData.IsDelete !== undefined ? rowData.IsDelete : rowData.isDelete;
+	let isDelete = getIsDeleted(rowData);
 
 
 	console.log("Address File: \\wwwroot\\Pages\\ProvinceManagement\\js\\CreateFuncScript.js ");
@@ -267,6 +278,14 @@ function updateToolbarDeleteRestore(rowData) {
 	}
 
 }
+
+function getIsDeleted (row) {
+	if (!row || typeof row !== "object") return false;
+	if (typeof row.IsDelete !== "undefined") return !!row.IsDelete;
+	if (typeof row.isDelete !== "undefined") return !!row.isDelete;
+	return false;
+}
+
 
 function ProvinceRowSelected(e) {
 	let grid = getProvinceGrid();

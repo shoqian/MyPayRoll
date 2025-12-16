@@ -18,6 +18,7 @@
     <PackageReference Include="Syncfusion.EJ2.JavaScript" Version="29.1.33" />
     <PackageReference Include="Syncfusion.EJ2.WordEditor.AspNet.Core" Version="29.1.33" />
     <PackageReference Include="Syncfusion.Licensing" Version="29.1.33" />
+    <PackageReference Include="Vite.AspNetCore" Version="2.4.1" />
   </ItemGroup>
 
 </Project>
